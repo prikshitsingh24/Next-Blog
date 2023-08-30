@@ -1,0 +1,16 @@
+import { useRouter } from 'next/navigation'
+export default function Appbar(){
+    const router=useRouter();
+    return(
+        <div className="position-fixed w-100 py-5 h-19 bg-black text-white">
+            <div className="flex">
+            <div className="text-white text-xl mx-10">My Blogs</div>
+           <button className="bg-black text-white rounded position-fixed px-4 mx-5">Home</button>
+           <button className="bg-black text-white rounded position-fixed px-4 mx-5" onClick={()=>{router.push('/MyBlogs')}}>My blogs</button>
+           <button className="bg-black text-white rounded position-fixed px-4 mx-5" onClick={()=>{router.push('/AddBlogs')}}>Add blogs</button>
+           <button className="bg-black text-white rounded position-fixed px-4 mx-5" onClick={()=>{router.push('/Todos')}}>Todos</button>
+            </div>
+           
+        </div>
+    );
+}
