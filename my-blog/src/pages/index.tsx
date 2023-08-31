@@ -13,6 +13,7 @@ export default function Home() {
     },300)
   }
   return (
+    
     <div>
       <div className='relative flex justify-center items-center h-screen'>
       <button className='bg-black text-white rounded position-fixed px-10 w-35 py-10 transition-transform duration-200 active:scale-95' onClick={navigateToSite}>
