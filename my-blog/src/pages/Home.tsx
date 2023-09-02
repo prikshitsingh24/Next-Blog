@@ -12,7 +12,7 @@ interface Data {
 export default function Blogs({data}:{data:Data[]}){
   const reverseData=[...data].reverse();
     return(
-        <div>
+        <div className="bg-amber-400">
            <Appbar></Appbar>
            <div className="grid grid-cols-12 my-5">
           <div className="col-span-12 sm:col-span-8">

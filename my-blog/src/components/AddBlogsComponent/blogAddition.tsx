@@ -36,9 +36,9 @@ export default function BlogAdditionComponent() {
   };
 
   return (
-    <div className="bg-black p-8 flex-column justify-center items-center h-screen">
-        <div className="text-white text-xl my-5">Your Blog</div>
-      <div className="bg-white p-8 rounded shadow-md w-100">
+    <div className="bg-amber-400 p-8 flex-column justify-center items-center h-screen">
+        <div className="text-black text-xl my-5">Your Blog</div>
+      <div className="bg-sky-200 p-8 rounded shadow-md w-100">
         <div className="mb-4">
           <label htmlFor="title" className="text-black block mb-1">
             Title:
@@ -46,7 +46,7 @@ export default function BlogAdditionComponent() {
           <input
             type="text"
             id="title"
-            className="py-2 px-3 w-full rounded border-gray-300"
+            className="py-2 px-3 w-full rounded border-black"
             onChange={handleTitle}
           />
         </div>
@@ -56,7 +56,7 @@ export default function BlogAdditionComponent() {
           </label>
           <textarea
             id="description"
-            className="py-2 px-3 w-full h-40 rounded border-gray-300 resize-none"
+            className="py-2 px-3 w-full h-96 rounded border-gray-300 resize-none"
             onChange={handleDescription}
           />
         </div>
