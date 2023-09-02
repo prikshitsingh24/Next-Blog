@@ -32,7 +32,7 @@ export default function Blogs({data}:{data:Data[]}){
 }
 
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   try {
     const response = await fetch('http://localhost:3000/api/postBlogs');
     const data = await response.json() as Data;
