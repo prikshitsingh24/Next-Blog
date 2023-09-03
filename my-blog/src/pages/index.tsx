@@ -12,7 +12,7 @@ export default function Home() {
   function navigateToSite(){
     setIsClicked(true);
     setTimeout(()=>{
-      router.push('/Home');
+      router.push('/Login');
     },900)
   }
   return (

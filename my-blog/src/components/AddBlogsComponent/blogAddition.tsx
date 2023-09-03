@@ -20,25 +20,30 @@ export default function BlogAdditionComponent() {
   }
 
   const handleSubmit=async()=>{
-    const response=await fetch('http://localhost:3000/api/postBlogs',{
-      method:'POST',
-      headers:{
-        'Content-Type':'application/json',
-      },
-      body:JSON.stringify({title,description,author}),
-    });
-    if(response.ok){
-      const data=await response.json();
-      router.push('/Home');
+    if(title=="" && description=="" && author==""){
+      alert("please fill all the fields");
     }else{
-      throw new Error('failed to create an article');
+      const response=await fetch('http://localhost:3000/api/postBlogs',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+        },
+        body:JSON.stringify({title,description,author}),
+      });
+      if(response.ok){
+        const data=await response.json();
+        router.push('/Home');
+      }else{
+        alert("please fill all the fields")
+      }
     }
+   
   };
 
   return (
     <div className="bg-amber-400 p-8 flex-column justify-center items-center h-screen">
         <div className="text-black text-xl my-5">Your Blog</div>
-      <div className="bg-sky-200 p-8 rounded shadow-md w-100">
+      <div className="bg-sky-200 p-8 rounded shadow-md w-full">
         <div className="mb-4">
           <label htmlFor="title" className="text-black block mb-1">
             Title:
