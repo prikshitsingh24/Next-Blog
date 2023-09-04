@@ -1,8 +1,11 @@
 import Appbar from "@/components/appbar";
 import Template from "@/components/template";
+import { userInfoState } from "@/states/atoms/userInfo";
+import { useMediaQuery } from "@mui/material";
 import { GetServerSideProps } from "next";
 import { getServerSession } from "next-auth/next";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
+import { useRecoilState } from "recoil";
 import { authOptions } from "./api/auth/[...nextauth]";
 interface Data {
     title: string;
@@ -13,14 +16,35 @@ interface Data {
 
 
 export default function Blogs({data,session}){
+  const[userInfo,setUserInfo]=useRecoilState(userInfoState);
   const reverseData=[...data].reverse();
+  const handleLogout=()=>{
+    signOut();
+  }
     return(
         <div className="bg-amber-400">
           {session ?(
-          <Appbar username={session.user.name}></Appbar>):(
+          <Appbar username={session.user.name}></Appbar>
+
+          ):(
             <Appbar username={"user not found!!"}></Appbar>
           )}
-           <div className="grid grid-cols-12 my-5">
+          {userInfo?(
+            
+              <div className="absolute z-[999] mx-40 min-[862px]:right-0 mx-10 w-60 h-40 bg-black rounded-xl my-1">
+              <div className="mx-[90px]">
+              <div className="my-2 cursor-pointer text-white">Settings</div>
+              </div>
+              <div className="border-t border-gray my-1"></div>
+              <div className="mx-[90px]">
+              <div className="cursor-pointer text-white" onClick={handleLogout}>Logout</div>
+              </div>
+              <div className="border-t border-gray my-1"></div>
+            </div>
+          ):(
+            <div></div>
+          )}
+           <div className="grid grid-cols-12 my-5" onClick={()=>setUserInfo(false)}>
           <div className="col-span-12 sm:col-span-8">
            <div className="px-10 text-xl">Blogs</div>
            {reverseData.map(x=>{

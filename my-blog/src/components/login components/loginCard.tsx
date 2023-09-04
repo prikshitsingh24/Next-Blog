@@ -60,7 +60,6 @@ export default function LoginCard(){
         });
         if(signInResponse && !signInResponse.error){
             router.push('/Home');
-            return null;
             
         }else{
             console.log("Error: ",signInResponse);

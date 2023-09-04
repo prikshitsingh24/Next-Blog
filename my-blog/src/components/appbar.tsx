@@ -1,10 +1,12 @@
+import { userInfoState } from '@/states/atoms/userInfo';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 export default function Appbar(props:any) {
   const router = useRouter();
-  const[userInfo,setUserInfo]=useState(false);
+  const[userInfo,setUserInfo]=useRecoilState(userInfoState);
   const isSmScreen = useMediaQuery('(max-width: 862px)'); // Define your breakpoint here
   const handleUserInfo=()=>{
     setUserInfo(!userInfo);
