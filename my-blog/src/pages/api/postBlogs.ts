@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import dbConnect from './database/connection'
-import BookModel from './database/mongodb';
+import {BookModel} from './database/mongodb';
 
 
 export default async function handler(req:NextApiRequest,res:NextApiResponse){

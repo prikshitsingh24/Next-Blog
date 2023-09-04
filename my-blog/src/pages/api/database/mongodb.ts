@@ -7,6 +7,11 @@ interface IBook extends Document {
   author: string;
 }
 
+interface UserDetails{
+  username:string;
+  email:string;
+  password:string;
+}
 // Define the schema
 const bookSchema = new Schema<IBook>({
   title: {
@@ -26,7 +31,22 @@ const bookSchema = new Schema<IBook>({
   },
 });
 
+const userSchema=new Schema<UserDetails>({
+  username:{
+    type:String,
+    required:true
+  },
+  email:{
+    type:String,
+    required:true
+  },
+  password:{
+    type:String,
+    required:true
+  }
+});
 // Create and export the model
 const BookModel = mongoose.models.Book || mongoose.model<IBook>('Book', bookSchema);
+const UserModel=mongoose.models.User || mongoose.model<UserDetails>('User',userSchema);
 
-export default BookModel;
+export {BookModel,UserModel};
