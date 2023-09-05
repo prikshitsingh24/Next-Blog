@@ -11,6 +11,7 @@ interface UserDetails{
   username:string;
   email:string;
   password:string;
+  blogs:[]
 }
 // Define the schema
 const bookSchema = new Schema<IBook>({
@@ -43,7 +44,9 @@ const userSchema=new Schema<UserDetails>({
   password:{
     type:String,
     required:true
-  }
+  },
+  blogs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }]
+
 });
 // Create and export the model
 const BookModel = mongoose.models.Book || mongoose.model<IBook>('Book', bookSchema);

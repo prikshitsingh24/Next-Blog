@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import { TextField } from "@mui/material";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import { useRecoilState } from "recoil";
+import { blogIdState } from "@/states/atoms/blogId";
 
 export default function BlogAdditionComponent() {
+  const {data:session}=useSession();
   const[title,setTitle]=useState("");
   const[description,setDescription]=useState("");
-  const[author,setAuthor]=useState("");
+  const author=session?.user?.name;
+
   const router=useRouter();
 
   const handleTitle=(e:any)=>{
@@ -15,9 +20,7 @@ export default function BlogAdditionComponent() {
   const handleDescription=(e:any)=>{
     setDescription(e.target.value);
   }
-  const handleAuther=(e:any)=>{
-    setAuthor(e.target.value);
-  }
+
 
   const handleSubmit=async()=>{
     if(title=="" && description=="" && author==""){
@@ -51,7 +54,7 @@ export default function BlogAdditionComponent() {
           <input
             type="text"
             id="title"
-            className="py-2 px-3 w-full rounded border-black"
+            className="py-2 px-3 w-full rounded border-black outline-none"
             onChange={handleTitle}
           />
         </div>
@@ -61,7 +64,7 @@ export default function BlogAdditionComponent() {
           </label>
           <textarea
             id="description"
-            className="py-2 px-3 w-full h-96 rounded border-gray-300 resize-none"
+            className="py-2 px-3 w-full h-96 rounded border-gray-300 resize-none outline-none"
             onChange={handleDescription}
           />
         </div>
@@ -72,8 +75,9 @@ export default function BlogAdditionComponent() {
           <input
             type="text"
             id="title"
-            className="py-2 px-3 w-full rounded border-gray-300"
-            onChange={handleAuther}
+            className="py-2 px-3 w-full rounded border-gray-300 outline-none"
+            value={session?.user?.name}
+            readOnly={true}
           />
         </div>
         <Button variant="contained" color="success" onClick={handleSubmit}>

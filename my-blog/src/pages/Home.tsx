@@ -1,10 +1,12 @@
 import Appbar from "@/components/appbar";
 import Template from "@/components/template";
+import TodosTemplate from "@/components/todosTemplate";
 import { userInfoState } from "@/states/atoms/userInfo";
 import { useMediaQuery } from "@mui/material";
 import { GetServerSideProps } from "next";
 import { getServerSession } from "next-auth/next";
 import { signOut, useSession } from "next-auth/react";
+import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { authOptions } from "./api/auth/[...nextauth]";
 interface Data {
@@ -17,12 +19,33 @@ interface Data {
 
 export default function Blogs({data,session}){
   const[userInfo,setUserInfo]=useRecoilState(userInfoState);
+  const[outerTodo,setOuterTodo]=useState(0);
   const reverseData=[...data].reverse();
+
+  const handleTodos=()=>{
+    setOuterTodo(outerTodo+1);
+    console.log(outerTodo);
+  }
   const handleLogout=()=>{
     signOut();
   }
+  const todoNumbers = Array.from({ length: outerTodo }, (_, index) => index + 1);
+  console.log(todoNumbers);
+
+  const [isCheckedArray, setIsCheckedArray] = useState(new Array(outerTodo).fill(false));
+
+  const handleCheckedChange = (index:any) => {
+    // Create a copy of the isCheckedArray
+    const newIsCheckedArray = [...isCheckedArray];
+    // Toggle the checked state of the specific checkbox at the given index
+    newIsCheckedArray[index] = !newIsCheckedArray[index];
+    // Update the state with the new array
+    setIsCheckedArray(newIsCheckedArray);
+
+  };
+  
     return(
-        <div className="bg-amber-400">
+        <div className="bg-amber-400 h-screen">
           {session ?(
           <Appbar username={session.user.name}></Appbar>
 
@@ -44,7 +67,16 @@ export default function Blogs({data,session}){
           ):(
             <div></div>
           )}
-           <div className="grid grid-cols-12 my-5" onClick={()=>setUserInfo(false)}>
+          <div onClick={()=>setUserInfo(false)}>
+          <div className="relative flex justify-center item-center my-5 rounded-xl">
+            <div className="flex bg-white w-96 rounded-xl">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5 my-2 mx-2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+            <input className="rounded-xl border-none w-full outline-none px-5" placeholder="Search the blog you desire!!" />
+            </div>
+          </div>
+          <div className="bg-amber-400 grid grid-cols-12 my-5" >
           <div className="col-span-12 sm:col-span-8">
            <div className="px-10 text-xl">Blogs</div>
            {reverseData.map(x=>{
@@ -52,10 +84,18 @@ export default function Blogs({data,session}){
            })}
           </div>
           <div className="col-span-12 sm:col-span-4 mx-8">
-            <div className="px-10 text-xl">Todos</div>
+            <div className="flex justify-between">
+            <div className="px-5 text-xl my-2">Todos</div>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5 cursor-pointer my-3 mx-2" onClick={handleTodos}>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+            </div>
+            {todoNumbers.map((todoNumber,index)=>(
+               <TodosTemplate title={"20 August 2023"} text={"gym at 5:30"}></TodosTemplate>
+            ))}
             </div>
            </div>
-           
+          </div>
            </div>
            
     );
