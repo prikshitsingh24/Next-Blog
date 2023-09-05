@@ -32,22 +32,20 @@ export async function getServerSideProps(context) {
     const session=await getServerSession(context.req,context.res,authOptions);
   
     try {
-      // Call the server-side function to get user blogs
       const response = await fetch(`http://localhost:3000/api/getUserBlogs?author=${session?.user?.name}`);
       
       if (response.ok) {
-        const userBlogs = await response.json(); // Extract the JSON data
+        const userBlogs = await response.json();
         return {
           props: {
-            userBlogs, // Make sure userBlogs is in a serializable format
+            userBlogs,
           },
         };
       } else {
-        // Handle the case where the API request fails
         console.error(`API request failed with status: ${response.status}`);
         return {
           props: {
-            userBlogs: [], // Return an empty array or default data
+            userBlogs: [],
           },
         };
       }
@@ -55,7 +53,7 @@ export async function getServerSideProps(context) {
       console.error(error);
       return {
         props: {
-          userBlogs: [], // Return an empty array or default data
+          userBlogs: [],
         },
       };
     }
