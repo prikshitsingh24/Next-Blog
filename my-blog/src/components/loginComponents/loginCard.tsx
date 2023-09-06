@@ -3,6 +3,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styled from "styled-components";
+import ErrorComponent from "../errorComponent";
 import GithubButton from "./githubButton";
 import GoogleButton from "./googleButton";
 
@@ -10,6 +11,8 @@ import GoogleButton from "./googleButton";
 
 export default function LoginCard(){
     const router=useRouter();
+    const[popUp,setPopUp]=useState(false);
+    const[error,setError]=useState("");
     const[showSignUp,setShowSignUp]=useState(false);
     const[username,setUsername]=useState("");
     const[email,setEmail]=useState("");
@@ -26,24 +29,39 @@ export default function LoginCard(){
     const handlePassword=(e:any)=>{
         setPassword(e.target.value)
     }
-    const handleSignUpToLogin=async()=>{
-        const response=await fetch('http://localhost:3000/api/postUsers',{
-            method:"POST",
-            headers:{
-                'Content-Type':'application/json',
-              },
-              body:JSON.stringify({username:username,email:email,password:password})
-        });
-        if(response.ok){
-            setPassword("");
-            setUsername("");
-            setShowSignUp(!showSignUp);
-          }else{
-            alert("please fill all the fields")
+    const handleSignUpToLogin = async () => {
+        try {
+          const response = await fetch('http://localhost:3000/api/postUsers', {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username: username, email: email, password: password })
+          });
+      
+          const data = await response.json();
+          console.log(data);
+          if (response.ok) {
+            if (data.error) {
+                setPopUp(true);
+                setError(data.error);
+              }else{
+                setPopUp(false);
+                setShowSignUp(!showSignUp);
+              }
+            
+          } else {
+              console.log('Unexpected error:', data);
+           
           }
-        
-    }
+        } catch (error) {
+          console.log(error);
+          // Handle network errors or other exceptions here
+        }
+      };
+      
     const handleSignUp=()=>{
+        setPopUp(false);
         setShowSignUp(!showSignUp);
     }
     const handleUsernameLogin=(e:any)=>{
@@ -59,10 +77,12 @@ export default function LoginCard(){
             redirect:false
         });
         if(signInResponse && !signInResponse.error){
+            setPopUp(false);
             router.push('/Home');
             
         }else{
-            console.log("Error: ",signInResponse);
+            setPopUp(true);
+            setError("User not found!!! please check your username or password ");
         }
     }
 
@@ -76,9 +96,15 @@ export default function LoginCard(){
                 <div className="relative flex justify-center item-center">
                 <div className="border-t border-black my-4 w-100 mx-10"></div>
                 </div>
+                {popUp &&(
+                    <div className="relative flex justify-center item-center">
+                        <ErrorComponent error={error}/>
+                    </div>
+                    
+                )}
                 {showSignUp?(
                     <div>
-                        <div className="mx-5 my-10">
+                        <div className="mx-5 my-2">
                 <div> Username:  </div>
                 <input className="w-full rounded border-black py-2 px-5" onChange={handleUsername}/>
                 <div className=" my-10">
@@ -92,25 +118,25 @@ export default function LoginCard(){
                     </div>
                 ):(
                     <div>
-                        <div className="mx-5 my-10">
+                        <div className="mx-5 my-2">
                 <div> Username:  </div>
-                <input className="w-full rounded border-black py-2 px-5" onChange={handleUsernameLogin}/>
+                <input className="w-full rounded border-black py-2 px-5 outline-none" onChange={handleUsernameLogin} placeholder={"Enter username"}/>
                 <div className="my-10"></div>
                 <div> Password:  </div>
-                <input className="w-full rounded border-black py-2 px-5" onChange={handlePasswordLogin}/>
+                <input className="w-full rounded border-black py-2 px-5 outline-none" onChange={handlePasswordLogin} placeholder={"Enter password"}/>
                 </div>
                     </div>
                 )}
                 
                 {showSignUp ?(
                     <div>
-                        <div className="relative flex justify-center item-center">
+                        <div className="relative flex justify-center item-center my-5">
                 <Button color="success" variant="contained" onClick={handleSignUpToLogin}>Sign Up</Button>
                 </div>
                     </div>
                 ):(
                     <div>
-                        <div className="relative flex justify-center item-center">
+                        <div className="relative flex justify-center item-center my-5">
                 <Button color="success" variant="contained" onClick={handleNavigation}>Login</Button>
                 </div>
                     </div>

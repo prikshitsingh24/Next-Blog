@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     try {
       const user = await UserModel.findOne({ username: username });
       if (user) {
-        res.status(202).json({ message: "User already exists" });
+        res.status(202).json({ error: "User already exists!! please try another username", message: "User already exists with the provided username" });
       } else {
         const newUser = new UserModel({ username: username, email: email, password: password });
         await newUser.save();
