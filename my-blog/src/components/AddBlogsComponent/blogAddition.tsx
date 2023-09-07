@@ -5,10 +5,13 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { useRecoilState } from "recoil";
 import { blogIdState } from "@/states/atoms/blogId";
+import ErrorComponent from "../errorComponent";
 
 export default function BlogAdditionComponent() {
   const {data:session}=useSession();
   const[title,setTitle]=useState("");
+  const[error,setError]=useState("");
+  const [popUp,setPopUp]=useState(false);
   const[description,setDescription]=useState("");
   const author=session?.user?.name;
 
@@ -35,9 +38,11 @@ export default function BlogAdditionComponent() {
       });
       if(response.ok){
         const data=await response.json();
+        setPopUp(false);
         router.push('/Home');
       }else{
-        alert("please fill all the fields")
+        setPopUp(true);
+        setError("Please fill all the fields!!");
       }
     }
    
@@ -47,6 +52,13 @@ export default function BlogAdditionComponent() {
     <div className="bg-amber-400 p-8 flex-column justify-center items-center h-screen">
         <div className="text-black text-xl my-5">Your Blog</div>
       <div className="bg-sky-200 p-8 rounded shadow-md w-full">
+        {popUp ?(
+            <div className="relative flex justify-center item-center">
+              <ErrorComponent error={error}></ErrorComponent>
+            </div>
+        ):(
+          <div></div>
+        )}
         <div className="mb-4">
           <label htmlFor="title" className="text-black block mb-1">
             Title:

@@ -30,6 +30,10 @@ export default function LoginCard(){
         setPassword(e.target.value)
     }
     const handleSignUpToLogin = async () => {
+        if(!username || !password || !email){
+            setPopUp(true);
+            setError("Please fill all the credentials");
+        }
         try {
           const response = await fetch('http://localhost:3000/api/postUsers', {
             method: "POST",
@@ -71,19 +75,25 @@ export default function LoginCard(){
         setPasswordLogin(e.target.value)
     }
     const handleNavigation=async()=>{
-        const signInResponse=await signIn("credentials",{
-            username:usernameLogin,
-            password:passwordLogin,
-            redirect:false
-        });
-        if(signInResponse && !signInResponse.error){
-            setPopUp(false);
-            router.push('/Home');
-            
-        }else{
+        if(!usernameLogin || !passwordLogin){
             setPopUp(true);
-            setError("User not found!!! please check your username or password ");
+            setError("Please fill all the credentials");
+        }else{
+            const signInResponse=await signIn("credentials",{
+                username:usernameLogin,
+                password:passwordLogin,
+                redirect:false
+            });
+            if(signInResponse && !signInResponse.error){
+                setPopUp(false);
+                router.push('/Home');
+                
+            }else{
+                setPopUp(true);
+                setError("User not found!!! please check your username or password ");
+            }
         }
+       
     }
 
     
@@ -120,7 +130,7 @@ export default function LoginCard(){
                     <div>
                         <div className="mx-5 my-2">
                 <div> Username:  </div>
-                <input className="w-full rounded border-black py-2 px-5 outline-none" onChange={handleUsernameLogin} placeholder={"Enter username"}/>
+                <input key={"login"} className="w-full rounded border-black py-2 px-5 outline-none" onChange={handleUsernameLogin} placeholder={"Enter username"}/>
                 <div className="my-10"></div>
                 <div> Password:  </div>
                 <input className="w-full rounded border-black py-2 px-5 outline-none" onChange={handlePasswordLogin} placeholder={"Enter password"}/>
