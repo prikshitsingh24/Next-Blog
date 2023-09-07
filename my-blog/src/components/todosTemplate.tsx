@@ -7,7 +7,10 @@ export default function TodosTemplate(props: any) {
   const [allTrue, setAllTrue] = useState(false);
   // Use an array to track the checked state of each checkbox
   const [isCheckedArray, setIsCheckedArray] = useState(new Array(todo+1).fill(false));
-
+  const [headingContent,setHeadingContent]=useState("");
+  const handleHeadingContent=(e:any)=>{
+    setHeadingContent(e.target.value)
+  }
   const handleCheckedChange = (index:any) => {
     // Create a copy of the isCheckedArray
     const newIsCheckedArray = [...isCheckedArray];
@@ -41,7 +44,9 @@ export default function TodosTemplate(props: any) {
         ):(
             <div className="rounded-md border border-black p-4 mb-4">
         <div className="flex justify-between">
-        <div className="text-xl my-2">{props.title}</div>
+        <div className="text-xl my-2">
+          <input type="text" className="rounded w-40 outline-none px-2" onChange={handleHeadingContent}/>
+        </div>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5 cursor-pointer my-3 mx-2" onClick={handleTodos}>
                 <path stroke-linecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
@@ -61,7 +66,9 @@ export default function TodosTemplate(props: any) {
                         checked={isCheckedArray[index]}
                         onChange={() => handleCheckedChange(index)} // Pass the index to the handler
                       />
-                      <div className="mx-2">{props.text}</div>
+                      <div className="mx-2">
+                        <input type="text" className="rounded w-full text-sm px-2" />
+                      </div>
                     </label>
                   </div>
                 )
