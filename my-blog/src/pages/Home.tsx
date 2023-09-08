@@ -83,17 +83,6 @@ export default function Blogs({data,session}){
             return <Template data={x}></Template>
            })}
           </div>
-          <div className="col-span-12 sm:col-span-4 mx-8">
-            <div className="flex justify-between">
-            <div className="px-5 text-xl my-2">Todos</div>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5 cursor-pointer my-3 mx-2" onClick={handleTodos}>
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
-            </div>
-            {todoNumbers.map((todoNumber,index)=>(
-               <TodosTemplate title={"20 August 2023"} text={"gym at 5:30"}></TodosTemplate>
-            ))}
-            </div>
            </div>
           </div>
            </div>
