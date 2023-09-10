@@ -19,7 +19,6 @@ interface Data {
 
 export default function Blogs({data,session}){
   const[userInfo,setUserInfo]=useRecoilState(userInfoState);
-  const[outerTodo,setOuterTodo]=useState(0);
   const reverseData=[...data].reverse();
   const handleLogout=()=>{
     signOut();
@@ -87,7 +86,7 @@ export async function getServerSideProps(context) {
         }
       }
     }
-    const response = await fetch('http://localhost:3000/api/postBlogs');
+    const response = await fetch('http://localhost:3000/api/postBlogs?limit=10');
     const data = await response.json() as Data;
     console.log(session);
     return {
