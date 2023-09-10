@@ -21,7 +21,7 @@ export default function MyBlogs({userBlogs}){
             </div>
           </div>
           {reverseData.map(x=>{
-            return <Template data={x}></Template>
+            return <Template key={x._id} id={x._id} data={x}></Template>
            })}
         </div>
         

@@ -6,7 +6,9 @@ export default function News(){
             News
             </div>
             <div className="w-full h-100 border rounded border-black ">
-                hi
+                <div className="relative flex justify-center">
+                    Today's latest news!
+                </div>
             </div>
         </div>
     );

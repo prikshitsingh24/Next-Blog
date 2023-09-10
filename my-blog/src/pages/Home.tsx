@@ -61,7 +61,7 @@ export default function Blogs({data,session}){
           <div className="col-span-12 sm:col-span-8">
            <div className="px-10 text-xl">Blogs</div>
            {reverseData.map(x=>{
-            return <Template data={x}></Template>
+            return <Template key={x._id} id={x._id} data={x}></Template>
            })}
           </div>
           <div className="col-span-12 sm:col-span-4 mx-10 my-5">
