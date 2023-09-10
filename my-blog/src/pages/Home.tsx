@@ -1,6 +1,5 @@
 import Appbar from "@/components/appbar";
 import Template from "@/components/template";
-import TodosTemplate from "@/components/todosTemplate";
 import { userInfoState } from "@/states/atoms/userInfo";
 import { useMediaQuery } from "@mui/material";
 import { GetServerSideProps } from "next";
@@ -9,6 +8,7 @@ import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { authOptions } from "./api/auth/[...nextauth]";
+import News from "./News";
 interface Data {
     title: string;
     description: string;
@@ -21,28 +21,10 @@ export default function Blogs({data,session}){
   const[userInfo,setUserInfo]=useRecoilState(userInfoState);
   const[outerTodo,setOuterTodo]=useState(0);
   const reverseData=[...data].reverse();
-
-  const handleTodos=()=>{
-    setOuterTodo(outerTodo+1);
-    console.log(outerTodo);
-  }
   const handleLogout=()=>{
     signOut();
   }
-  const todoNumbers = Array.from({ length: outerTodo }, (_, index) => index + 1);
-  console.log(todoNumbers);
 
-  const [isCheckedArray, setIsCheckedArray] = useState(new Array(outerTodo).fill(false));
-
-  const handleCheckedChange = (index:any) => {
-    // Create a copy of the isCheckedArray
-    const newIsCheckedArray = [...isCheckedArray];
-    // Toggle the checked state of the specific checkbox at the given index
-    newIsCheckedArray[index] = !newIsCheckedArray[index];
-    // Update the state with the new array
-    setIsCheckedArray(newIsCheckedArray);
-
-  };
   
     return(
         <div className="bg-amber-400 h-screen">
@@ -82,6 +64,9 @@ export default function Blogs({data,session}){
            {reverseData.map(x=>{
             return <Template data={x}></Template>
            })}
+          </div>
+          <div className="col-span-12 sm:col-span-4 mx-10 my-5">
+          <News></News>
           </div>
            </div>
           </div>

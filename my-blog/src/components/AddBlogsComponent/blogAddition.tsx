@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { useRecoilState } from "recoil";
 import { blogIdState } from "@/states/atoms/blogId";
 import ErrorComponent from "../errorComponent";
+import MarkdownRenderer from "./markdownComponent";
 
 export default function BlogAdditionComponent() {
   const {data:session}=useSession();
@@ -13,6 +14,7 @@ export default function BlogAdditionComponent() {
   const[error,setError]=useState("");
   const [popUp,setPopUp]=useState(false);
   const[description,setDescription]=useState("");
+  const [markdown,setMarkdown]=useState<string>("");
   const author=session?.user?.name;
 
   const router=useRouter();
@@ -23,10 +25,12 @@ export default function BlogAdditionComponent() {
   const handleDescription=(e:any)=>{
     setDescription(e.target.value);
   }
-
+  const handleMarkdownChange=(e:any)=>{
+    setMarkdown(e.target.value);
+  }
 
   const handleSubmit=async()=>{
-    if(title=="" && description=="" && author==""){
+    if(title=="" && markdown=="" && author==""){
       alert("please fill all the fields");
     }else{
       const response=await fetch('http://localhost:3000/api/postBlogs',{
@@ -34,7 +38,7 @@ export default function BlogAdditionComponent() {
         headers:{
           'Content-Type':'application/json',
         },
-        body:JSON.stringify({title,description,author}),
+        body:JSON.stringify({title,markdown,author}),
       });
       if(response.ok){
         const data=await response.json();
@@ -49,7 +53,7 @@ export default function BlogAdditionComponent() {
   };
 
   return (
-    <div className="bg-amber-400 p-8 flex-column justify-center items-center h-screen">
+    <div className="bg-amber-400 p-8 flex-column justify-center items-center h-full">
         <div className="text-black text-xl my-5">Your Blog</div>
       <div className="bg-sky-200 p-8 rounded shadow-md w-full">
         {popUp ?(
@@ -74,13 +78,21 @@ export default function BlogAdditionComponent() {
           <label htmlFor="description" className="text-black block mb-1">
             Description:
           </label>
+          <div>
           <textarea
             id="description"
             className="py-2 px-3 w-full h-96 rounded border-gray-300 resize-none outline-none"
-            onChange={handleDescription}
+            value={markdown}
+            onChange={handleMarkdownChange}
           />
+          <div>Preview:</div>
+          <div className="w-full h-[400px] bg-white border rounded border-black overflow-auto px-3">
+          <MarkdownRenderer content={markdown}></MarkdownRenderer>
+          </div>
+          </div>
+          
         </div>
-        <div className="mb-4">
+        <div className="mb-4 my-5">
           <label htmlFor="title" className="text-black block mb-1">
             Author:
           </label>
