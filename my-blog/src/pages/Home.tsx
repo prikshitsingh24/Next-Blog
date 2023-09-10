@@ -26,7 +26,7 @@ export default function Blogs({data,session}){
 
   
     return(
-        <div className="bg-amber-400 h-screen">
+        <div className="bg-Beige h-screen">
           {session ?(
           <Appbar username={session.user.name}></Appbar>
 
@@ -57,7 +57,7 @@ export default function Blogs({data,session}){
             <input className="rounded-xl border-none w-full outline-none px-5" placeholder="Search the blog you desire!!" />
             </div>
           </div>
-          <div className="bg-amber-400 grid grid-cols-12 my-5" >
+          <div className="bg-Beige grid grid-cols-12 my-5" >
           <div className="col-span-12 sm:col-span-8">
            <div className="px-10 text-xl">Blogs</div>
            {reverseData.map(x=>{

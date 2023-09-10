@@ -99,12 +99,12 @@ export default function LoginCard(){
     
     return(
         <div className="my-40">
-            <div className="bg-sky-200 w-110 h-110 rounded-md">
+            <div className="bg-darkgrey w-110 h-110 rounded-md">
                 <div className="relative flex justify-center item-center">
-                <div className="py-5 text-2xl">Next-Blog</div>
+                <div className="py-5 text-2xl text-white">Next-Blog</div>
                 </div>
                 <div className="relative flex justify-center item-center">
-                <div className="border-t border-black my-4 w-100 mx-10"></div>
+                <div className="border-t border-white my-4 w-100 mx-10"></div>
                 </div>
                 {popUp &&(
                     <div className="relative flex justify-center item-center">
@@ -115,24 +115,24 @@ export default function LoginCard(){
                 {showSignUp?(
                     <div>
                         <div className="mx-5 my-2">
-                <div> Username:  </div>
+                <div className="text-white"> Username:  </div>
                 <input className="w-full rounded border-black py-2 px-5" onChange={handleUsername}/>
                 <div className=" my-10">
-                <div> Email:  </div>
+                <div className="text-white"> Email:  </div>
                 <input className="w-full rounded border-black py-2 px-5" onChange={handleEmail}/>
                 </div>
                 <div className="my-10"></div>
-                <div> Password:  </div>
+                <div className="text-white"> Password:  </div>
                 <input className="w-full rounded border-black py-2 px-5" onChange={handlePassword}/>
                 </div>
                     </div>
                 ):(
                     <div>
                         <div className="mx-5 my-2">
-                <div> Username:  </div>
+                <div className="text-white"> Username:  </div>
                 <input key={"login"} className="w-full rounded border-black py-2 px-5 outline-none" onChange={handleUsernameLogin} placeholder={"Enter username"}/>
                 <div className="my-10"></div>
-                <div> Password:  </div>
+                <div className="text-white"> Password:  </div>
                 <input className="w-full rounded border-black py-2 px-5 outline-none" onChange={handlePasswordLogin} placeholder={"Enter password"}/>
                 </div>
                     </div>
@@ -159,11 +159,11 @@ export default function LoginCard(){
                 ):(
                     <div>
                         <div className="relative flex justify-center item-center">
-                    <div className="text-sm my-3">New to Next-blog?</div>
-                    <div className="text-sm my-3 mx-1 cursor-pointer text-blue underline" onClick={handleSignUp}>Sign Up</div>
+                    <div className="text-sm my-3 text-white">New to Next-blog?</div>
+                    <div className="text-sm my-3 mx-1 cursor-pointer text-white underline" onClick={handleSignUp}>Sign Up</div>
                 </div>
                 <div className="relative flex justify-center item-center">
-                    <div className="text-2xl my-5">OR</div>
+                    <div className="text-2xl my-5 text-white">OR</div>
                 </div>
                 <div className="relative flex justify-center item-center">
                     <GoogleButton></GoogleButton>

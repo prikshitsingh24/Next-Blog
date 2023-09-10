@@ -12,15 +12,15 @@ export default function Appbar(props:any) {
     setUserInfo(!userInfo);
   }
   return (
-    <div className={`position-fixed flex w-full py-2 h-19 bg-red-500 text-white justify-between items-center ${isSmScreen ? 'flex-col' : 'flex-row'}`}>
+    <div className={`position-fixed flex w-full py-2 h-19 bg-darkgrey text-white justify-between items-center ${isSmScreen ? 'flex-col' : 'flex-row'}`}>
       <div className="flex">
         <div className="text-white text-xl mx-10">Next-Blogs</div>
         {!isSmScreen && (
           <>
-            <button className="bg-red-500 text-white rounded position-fixed px-4 mx-5">Home</button>
-            <button className="bg-red-500 text-white rounded position-fixed px-4 mx-5" onClick={() => router.push('/MyBlogs')}>My blogs</button>
-            <button className="bg-red-500 text-white rounded position-fixed px-4 mx-5" onClick={() => router.push('/AddBlogs')}>Add blogs</button>
-            <button className="bg-red-500 text-white rounded position-fixed px-4 mx-5" onClick={() => router.push('/BloggersGuild')}>Bloggers' Guild</button>
+            <button className="bg-darkgrey text-white rounded position-fixed px-4 mx-5">Home</button>
+            <button className="bg-darkgrey text-white rounded position-fixed px-4 mx-5" onClick={() => router.push('/MyBlogs')}>My blogs</button>
+            <button className="bg-darkgrey text-white rounded position-fixed px-4 mx-5" onClick={() => router.push('/AddBlogs')}>Add blogs</button>
+            <button className="bg-darkgrey text-white rounded position-fixed px-4 mx-5" onClick={() => router.push('/BloggersGuild')}>Bloggers' Guild</button>
           </>
         )}
       </div>

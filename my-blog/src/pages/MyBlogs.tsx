@@ -6,7 +6,7 @@ import { authOptions } from "./api/auth/[...nextauth]";
 export default function MyBlogs({userBlogs}){
     const reverseData=[...userBlogs].reverse();
     return(
-        <div className="bg-amber-400 h-full ">
+        <div className="bg-Beige h-full ">
             <div className="relative flex justify-center item-center">
             <div className="text-3xl my-10">
                 Your Blogs!!!

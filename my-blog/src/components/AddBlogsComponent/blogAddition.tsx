@@ -50,9 +50,9 @@ export default function BlogAdditionComponent() {
   }
 
   return (
-    <div className="bg-amber-400 p-8 flex-column justify-center items-center h-full">
+    <div className="bg-Beige p-8 flex-column justify-center items-center h-full">
         <div className="text-black text-xl my-5">Your Blog</div>
-      <div className="bg-sky-200 p-8 rounded shadow-md w-full">
+      <div className="bg-darkgrey p-8 rounded shadow-md w-full">
         {popUp ?(
             <div className="relative flex justify-center item-center">
               <ErrorComponent error={error}></ErrorComponent>
@@ -62,24 +62,24 @@ export default function BlogAdditionComponent() {
         )}
         <div className="mb-4">
           <div className="flex justify-between">
-          <label htmlFor="title" className="text-black block mb-1">
+          <label htmlFor="title" className="text-white block mb-1">
             Title:
           </label>
           </div>
           <input
             type="text"
             id="title"
-            className="py-2 px-3 w-full rounded border-black outline-none"
+            className="py-2 px-3 w-full rounded border-black outline-none bg-Beige"
             onChange={handleTitle}
           />
         </div>
         <div className="mb-4">
           <div className="flex justify-between">
-          <label htmlFor="description" className="text-black block mb-1">
+          <label htmlFor="description" className="text-white block mb-1">
             Description:
           </label>
           <div className="cursor-pointer" onClick={handleNavigationToDoc}>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 cursor-pointer">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6 cursor-pointer text-white">
           <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
           </svg>
           </div>
@@ -87,20 +87,20 @@ export default function BlogAdditionComponent() {
           <div>
           <textarea
             id="description"
-            className="py-2 px-3 w-full h-96 rounded border-gray-300 resize-none outline-none"
+            className="py-2 px-3 w-full h-96 rounded border-gray-300 resize-none outline-none bg-Beige "
             value={markdown}
             onChange={handleMarkdownChange}
             placeholder="It also supports markdown!!!"
           />
-          <div>Preview:</div>
-          <div className="w-full h-[400px] bg-white border rounded border-black overflow-auto px-3">
+          <div className="text-white">Preview:</div>
+          <div className="w-full h-[500px] border rounded border-black overflow-auto px-3 bg-darkgrey text-white">
           <MarkdownRenderer content={markdown}></MarkdownRenderer>
           </div>
           </div>
           
         </div>
         <div className="mb-4 my-5">
-          <label htmlFor="title" className="text-black block mb-1">
+          <label htmlFor="title" className="text-white block mb-1">
             Author:
           </label>
           <input

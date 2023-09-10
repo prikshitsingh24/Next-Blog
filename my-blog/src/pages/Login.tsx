@@ -11,7 +11,7 @@ export default function LoginPage(){
         router.push("/Home");
     }
     return(
-        <div className="relative flex justify-center item-center bg-amber-400 h-screen">   
+        <div className="relative flex justify-center item-center bg-Beige h-screen">   
        <LoginCard></LoginCard>
         </div>
     );

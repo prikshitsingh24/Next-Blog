@@ -1,4 +1,5 @@
 
+import { colors } from '@mui/material'
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
@@ -17,6 +18,10 @@ const config: Config = {
       spacing:{
         '100':'32rem',
         '110':'42rem'
+      },
+      colors:{
+        Beige:'#FFE5B4',
+        darkgrey:'#323232',
       }
     },
   },
