@@ -1,4 +1,5 @@
 import MarkdownRenderer from "@/components/AddBlogsComponent/markdownComponent";
+import BlogTemplate from "@/components/blogTemplate";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 
@@ -6,10 +7,10 @@ import { authOptions } from "../api/auth/[...nextauth]";
 export default function BlogDetailPage({data}){
 
     return(
-        <div>
-      <h1>{data.title}</h1>
-      <MarkdownRenderer content={data.description} />
-        </div>
+      <div className="bg-Beige h-screen">
+        <BlogTemplate data={data}/>
+      </div>
+        
     );
 }
 
