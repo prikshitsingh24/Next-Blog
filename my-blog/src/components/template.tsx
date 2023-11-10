@@ -15,6 +15,7 @@ export default function Template({data,id}){
             <div className="text-xl my-2">{data.title}</div>
             <div className="border px-2 py-2 border-black rounded-xl">
             <MarkdownRenderer content={data.description.slice(0,900)}></MarkdownRenderer>
+            <div>........</div>
             </div>
             <div className="text-xl my-5 flex justify-between">
                 <div>

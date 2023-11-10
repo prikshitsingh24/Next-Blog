@@ -50,9 +50,9 @@ export default function BlogAdditionComponent() {
   }
 
   return (
-    <div className="bg-Beige p-8 flex-column justify-center items-center h-full">
+    <div className="bg-Beige p-8 flex-column justify-center items-center h-full w-full">
         <div className="text-black text-xl my-5">Your Blog</div>
-      <div className="bg-darkgrey p-8 rounded shadow-md w-full">
+      <div className="bg-darkgrey p-2 rounded shadow-md w-full">
         {popUp ?(
             <div className="relative flex justify-center item-center">
               <ErrorComponent error={error}></ErrorComponent>
@@ -73,7 +73,8 @@ export default function BlogAdditionComponent() {
             onChange={handleTitle}
           />
         </div>
-        <div className="mb-4">
+        <div className="grid grid-cols-12 mb-4">
+          <div className='col-span-12 lg:col-span-6 '>
           <div className="flex justify-between">
           <label htmlFor="description" className="text-white block mb-1">
             Description:
@@ -84,16 +85,17 @@ export default function BlogAdditionComponent() {
           </svg>
           </div>
           </div>
-          <div>
           <textarea
             id="description"
-            className="py-2 px-3 w-full h-96 rounded border-gray-300 resize-none outline-none bg-Beige "
+            className="py-2 px-3 w-full h-[500px] rounded border-gray-300 resize-none outline-none bg-Beige "
             value={markdown}
             onChange={handleMarkdownChange}
             placeholder="It also supports markdown!!!"
           />
-          <div className="text-white">Preview:</div>
-          <div className="w-full h-[500px] border rounded border-black overflow-auto px-3 bg-darkgrey text-white">
+          </div>
+          <div className='col-span-12 lg:col-span-6'>
+          <div className="text-white mx-2">Preview:</div>
+          <div className="w-full h-[500px] border rounded border-black overflow-auto px-3 bg-darkgrey text-white my-1 mx-1">
           <MarkdownRenderer content={markdown}></MarkdownRenderer>
           </div>
           </div>
