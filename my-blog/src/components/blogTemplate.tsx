@@ -1,7 +1,7 @@
 import MarkdownRenderer from "./AddBlogsComponent/markdownComponent";
 
 
-export default function BlogTemplate({data}){
+export default function BlogTemplate({data}:any){
     return(
         <div>
             <div className="flex justify-center text-2xl">

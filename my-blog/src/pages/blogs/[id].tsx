@@ -14,7 +14,7 @@ export default function BlogDetailPage({data}){
     );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: { query: { id: any; }; }) {
     const {id}=context.query;
 
     try {

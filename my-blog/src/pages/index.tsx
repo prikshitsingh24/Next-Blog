@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { useSession } from 'next-auth/react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -9,12 +10,18 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home() {
   const [isClicked,setIsClicked]=useState(false)
   const router=useRouter();
+  const {data:session}=useSession();
   function navigateToSite(){
     setIsClicked(true);
+    if(session){
+      router.push("/Home");
+  }else{
     setTimeout(()=>{
       router.push('/Login');
-    },900)
+    },100)
   }
+  }
+    
   return (
     
     <div>

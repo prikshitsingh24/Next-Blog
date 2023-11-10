@@ -5,10 +5,10 @@ import { useMediaQuery } from "@mui/material";
 import { GetServerSideProps } from "next";
 import { getServerSession } from "next-auth/next";
 import { signOut, useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { authOptions } from "./api/auth/[...nextauth]";
-import News from "./News";
+import News from "../components/News";
 interface Data {
     title: string;
     description: string;
@@ -17,7 +17,7 @@ interface Data {
   }
 
 
-export default function Blogs({data,session}){
+export default function Blogs({data,session}:any){
   const[userInfo,setUserInfo]=useRecoilState(userInfoState);
   const reverseData=[...data].reverse();
   const handleLogout=()=>{
@@ -58,13 +58,13 @@ export default function Blogs({data,session}){
             </div>
           </div>
           <div className="bg-Beige grid grid-cols-12 my-5" >
-          <div className="col-span-12 sm:col-span-8">
+          <div className="col-span-12 md:col-span-12 lg:col-span-8">
            <div className="px-10 text-xl">Blogs</div>
            {reverseData.map(x=>{
             return <Template key={x._id} id={x._id} data={x}></Template>
            })}
           </div>
-          <div className="col-span-12 sm:col-span-4 mx-10 my-5">
+          <div className="col-span-12 md:col-span-0 lg:col-span-4  mx-10 my-5">
           <News></News>
           </div>
            </div>
@@ -75,13 +75,13 @@ export default function Blogs({data,session}){
 }
 
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context:any) {
   try {
     const session=await getServerSession(context.req,context.res,authOptions);
     if(!session){
       return{
         redirect:{
-          destination:'/',
+          destination:'/Login',
           permanent:false
         }
       }
