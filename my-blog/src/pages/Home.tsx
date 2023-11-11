@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { authOptions } from "./api/auth/[...nextauth]";
 import News from "../components/News";
+import { useRouter } from "next/navigation";
 interface Data {
     title: string;
     description: string;
@@ -18,10 +19,14 @@ interface Data {
 
 
 export default function Blogs({data,session}:any){
+  const router=useRouter();
   const[userInfo,setUserInfo]=useRecoilState(userInfoState);
   const reverseData=[...data].reverse();
   const handleLogout=()=>{
     signOut();
+  }
+  const handleSettings=()=>{
+    router.push('/Settings');
   }
 
   
@@ -37,7 +42,7 @@ export default function Blogs({data,session}:any){
             
               <div className="absolute z-[999] mx-40 min-[862px]:right-0 mx-10 w-60 h-40 bg-black rounded-xl my-1">
               <div className="mx-[90px]">
-              <div className="my-2 cursor-pointer text-white">Settings</div>
+              <div className="my-2 cursor-pointer text-white" onClick={handleSettings}>Settings</div>
               </div>
               <div className="border-t border-gray my-1"></div>
               <div className="mx-[90px]">

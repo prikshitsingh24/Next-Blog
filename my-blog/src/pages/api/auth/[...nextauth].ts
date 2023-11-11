@@ -60,7 +60,6 @@ export const authOptions = {
   callbacks:{
     
     async signIn(user:any, account:any,credentials:any) {
-      console.log(user.user)
       if (user.account.provider === 'google') {
         // Handle Google authentication
         const { name, email, image } = user.user;
