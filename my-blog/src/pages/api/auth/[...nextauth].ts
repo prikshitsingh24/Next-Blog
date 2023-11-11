@@ -5,6 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import dbConnect from "../database/connection";
 import { UserModel } from "../database/mongodb";
 import {Provider} from "next-auth/providers";
+import { useRouter } from "next/router";
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -46,7 +47,7 @@ export const authOptions = {
           }
         }
       }),
-
+      
   ] as Provider[],
   secret:process.env.NEXTAUTH_SECRET,
   session:{
@@ -56,6 +57,50 @@ export const authOptions = {
   jwt:{
     encryption:true
   },
+  callbacks:{
+    
+    async signIn(user:any, account:any,credentials:any) {
+      console.log(user.user)
+      if (user.account.provider === 'google') {
+        // Handle Google authentication
+        const { name, email, image } = user.user;
+    
+        // Check if the user already exists
+        await dbConnect();
+        const existingUser = await UserModel.findOne({ username: name });
+    
+        if (existingUser) {
+          return {
+            name: name,
+            email: email,
+            image: image,
+          }; // User already exists, do not proceed with sign-up
+        } else {
+          const newUser = new UserModel({
+            username: name,
+            email: email,
+            image: image,
+            password: " ", // Add your logic for setting the password
+          });
+    
+          await newUser.save();
+    
+          return {
+            name: name,
+            email: email,
+            image: image,
+          };
+        }
+      }else{
+        const { name, email, image } = user.user;
+        return{
+          name: name,
+          email: email,
+          image: image,
+        }
+      }
+    },
+  }
 }
 
-export default NextAuth(authOptions)
+export default NextAuth(authOptions);

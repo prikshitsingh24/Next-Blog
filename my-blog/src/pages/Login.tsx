@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 export default function LoginPage(){
     const router=useRouter();
     const {data:session}=useSession();
-    if(session){
+    if(session && session.user){
         router.push("/Home");
     }
     return(
