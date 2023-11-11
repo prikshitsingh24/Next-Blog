@@ -27,7 +27,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - name: Change to Project Directory
-      run: cd myblog   
+      run: cd my-blog   
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
