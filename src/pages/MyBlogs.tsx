@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth/next";
 import { useSession } from "next-auth/react";
 import { authOptions } from "./api/auth/[...nextauth]";
 
-export default function MyBlogs({userBlogs}){
+export default function MyBlogs({userBlogs}:any){
     const reverseData=[...userBlogs].reverse();
     return(
         <div className="bg-Beige h-screen ">
@@ -28,7 +28,7 @@ export default function MyBlogs({userBlogs}){
     );
 }
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context:any) {
     const session=await getServerSession(context.req,context.res,authOptions);
   
     try {
