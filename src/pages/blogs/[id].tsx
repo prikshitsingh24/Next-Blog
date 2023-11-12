@@ -1,6 +1,6 @@
-import MarkdownRenderer from "@/components/AddBlogsComponent/markdownComponent";
-import BlogTemplate from "@/components/blogTemplate";
+
 import { getServerSession } from "next-auth";
+import BlogTemplate from "../../components/blogTemplate";
 import { authOptions } from "../api/auth/[...nextauth]";
 
 

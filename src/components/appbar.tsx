@@ -1,8 +1,9 @@
-import { userInfoState } from '@/states/atoms/userInfo';
+
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useRecoilState } from 'recoil';
+import { userInfoState } from '../states/atoms/userInfo';
 
 export default function Appbar(props:any) {
   const router = useRouter();

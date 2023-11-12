@@ -1,5 +1,6 @@
-import BlogAdditionComponent from "@/components/AddBlogsComponent/blogAddition";
+
 import { useState } from "react";
+import BlogAdditionComponent from "../components/AddBlogsComponent/blogAddition";
 
 
 export default function AddBlogs(){

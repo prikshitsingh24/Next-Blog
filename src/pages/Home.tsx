@@ -1,14 +1,13 @@
-import Appbar from "@/components/appbar";
-import Template from "@/components/template";
-import { userInfoState } from "@/states/atoms/userInfo";
-import { useMediaQuery } from "@mui/material";
-import { GetServerSideProps } from "next";
+
 import { getServerSession } from "next-auth/next";
 import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { useRouter } from "next/navigation";
+import Appbar from "../components/appbar";
+import Template from "../components/template";
+import { userInfoState } from "../states/atoms/userInfo";
 interface Data {
     title: string;
     description: string;

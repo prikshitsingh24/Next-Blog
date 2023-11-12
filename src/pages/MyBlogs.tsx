@@ -1,6 +1,7 @@
-import Template from "@/components/template";
+
 import { getServerSession } from "next-auth/next";
 import { useSession } from "next-auth/react";
+import Template from "../components/template";
 import { authOptions } from "./api/auth/[...nextauth]";
 
 export default function MyBlogs({userBlogs}:any){
