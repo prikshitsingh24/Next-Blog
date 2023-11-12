@@ -35,7 +35,7 @@ export default function LoginCard(){
             setError("Please fill all the credentials");
         }
         try {
-          const response = await fetch(`${process.env.VERCEL_PUBLIC_URL}/api/postUsers`, {
+          const response = await fetch(`https://next-blogs-delta-ecru.vercel.app/api/postUsers`, {
             method: "POST",
             headers: {
               'Content-Type': 'application/json',
