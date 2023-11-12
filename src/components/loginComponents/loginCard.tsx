@@ -1,5 +1,6 @@
 import { Button, Typography } from "@mui/material";
 import { signIn } from "next-auth/react";
+import { Prosto_One } from "next/font/google";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import styled from "styled-components";
@@ -35,7 +36,8 @@ export default function LoginCard(){
             setError("Please fill all the credentials");
         }
         try {
-          const response = await fetch(`https://next-blogs-delta-ecru.vercel.app/api/postUsers`, {
+          const postUrl=`${process.env.VERCEL_PUBLIC_URL}/api/postUsers`  
+          const response = await fetch(`${postUrl}`, {
             method: "POST",
             headers: {
               'Content-Type': 'application/json',

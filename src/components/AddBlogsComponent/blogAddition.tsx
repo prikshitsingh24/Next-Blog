@@ -27,7 +27,8 @@ export default function BlogAdditionComponent() {
     if(title=="" && markdown=="" && author==""){
       alert("please fill all the fields");
     }else{
-      const response=await fetch(`https://next-blogs-delta-ecru.vercel.app/api/postBlogs`,{
+      const postUrl=`${process.env.VERCEL_PUBLIC_URL}/api/postBlogs` ;
+      const response=await fetch(`${postUrl}`,{
         method:'POST',
         headers:{
           'Content-Type':'application/json',

@@ -29,7 +29,7 @@ export default function Blogs({data,session}:any){
 
   
     return(
-        <div className="bg-Beige h-screen">
+        <div className="bg-Beige h-screen w-full">
           {session ?(
           <Appbar username={session.user.name}></Appbar>
 
