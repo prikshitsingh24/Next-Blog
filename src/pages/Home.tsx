@@ -90,7 +90,7 @@ export async function getServerSideProps(context:any) {
         }
       }
     }
-    const response = await fetch(`${process.env.VERCEL_URL}/api/postBlogs?limit=10`);
+    const response = await fetch(`${process.env.VERCEL_PUBLIC_URL}/api/postBlogs?limit=10`);
     const data = await response.json() as Data;
     console.log(session);
     return {

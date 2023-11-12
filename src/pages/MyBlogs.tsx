@@ -33,7 +33,7 @@ export async function getServerSideProps(context:any) {
     const session=await getServerSession(context.req,context.res,authOptions);
   
     try {
-      const response = await fetch(`${process.env.VERCEL_URL}/api/getUserBlogs?author=${session?.user?.name}`);
+      const response = await fetch(`${process.env.VERCEL_PUBLIC_URL}/api/getUserBlogs?author=${session?.user?.name}`);
       
       if (response.ok) {
         const userBlogs = await response.json();
