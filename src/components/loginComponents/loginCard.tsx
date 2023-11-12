@@ -35,7 +35,7 @@ export default function LoginCard(){
             setError("Please fill all the credentials");
         }
         try {
-          const response = await fetch('http://localhost:3000/api/postUsers', {
+          const response = await fetch(`${process.env.VERCEL_PUBLIC_URL}/api/postUsers`, {
             method: "POST",
             headers: {
               'Content-Type': 'application/json',
