@@ -4,7 +4,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 
 
-export default function BlogDetailPage({data}){
+export default function BlogDetailPage({data}:any){
 
     return(
       <div className="bg-Beige h-screen">

@@ -87,7 +87,7 @@ export default function BlogAdditionComponent() {
           </div>
           <textarea
             id="description"
-            className="py-2 px-3 w-full h-[500px] rounded border-gray-300 resize-none outline-none bg-Beige "
+            className="py-2 px-3 w-full h-[500px] rounded border-gray-300 overflow-auto resize-none outline-none bg-Beige "
             value={markdown}
             onChange={handleMarkdownChange}
             placeholder="It also supports markdown!!!"
