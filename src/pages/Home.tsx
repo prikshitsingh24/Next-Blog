@@ -8,7 +8,6 @@ import { signOut, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { authOptions } from "./api/auth/[...nextauth]";
-import News from "../components/News";
 import { useRouter } from "next/navigation";
 interface Data {
     title: string;
@@ -70,7 +69,7 @@ export default function Blogs({data,session}:any){
            })}
           </div>
           <div className="col-span-12 md:col-span-0 lg:col-span-4  mx-10 my-5">
-          <News></News>
+          <div>Hello!!</div>
           </div>
            </div>
           </div>
@@ -82,6 +81,7 @@ export default function Blogs({data,session}:any){
 
 export async function getServerSideProps(context:any) {
   try {
+    
     const session=await getServerSession(context.req,context.res,authOptions);
     if(!session){
       return{

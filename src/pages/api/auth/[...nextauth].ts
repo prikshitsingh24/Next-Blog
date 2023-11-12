@@ -1,105 +1,89 @@
-import NextAuth from "next-auth"
-import GithubProvider from "next-auth/providers/github"
+import NextAuth, { RequestInternal } from "next-auth";
+import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import dbConnect from "../database/connection";
 import { UserModel } from "../database/mongodb";
-import {Provider} from "next-auth/providers";
-import { useRouter } from "next/router";
+import dbConnect from "../database/connection";
+import { NextApiRequest, NextApiResponse } from "next";
+import { AuthOptions, SessionStrategy } from 'next-auth';
 
-export const authOptions = {
+
+export const authOptions:AuthOptions = {
   // Configure one or more authentication providers
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     }),
     CredentialsProvider({
-        // The name to display on the sign in form (e.g. "Sign in with...")
-        name: "Login",
-        // `credentials` is used to generate a form on the sign in page.
-        // You can specify which fields should be submitted, by adding keys to the `credentials` object.
-        // e.g. domain, username, password, 2FA token, etc.
-        // You can pass any HTML attribute to the <input> tag through the object.
-        credentials: {
-          username: { label: "Username", type: "text", placeholder: "jsmith" },
-          password: { label: "Password", type: "password" }
-        },
-        async authorize(credentials: any, req: any) {
-          // Add logic here to look up the user from the credentials supplied
-            if(!credentials || !credentials.username || !credentials.password){
-                return null;
-            }
-            await dbConnect();
-            const user= await UserModel.findOne({username:credentials.username})
-    
-          if (user && user.password===credentials.password) {
-            return {
-              name:user.username,
-              email:user.email,
-              image:""
-            }
-          } else {
-            // If you return null then an error will be displayed advising the user to check their details.
-            return null
-    
-            // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
-          }
+      name: "Login",
+      credentials: {
+        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials: Record<"username" | "password", string> | undefined, req: Pick<RequestInternal, "body" | "query" | "headers" | "method">) {
+        // Your authorize logic here
+        if (!credentials || !credentials.username || !credentials.password) {
+          return null;
         }
-      }),
-      
-  ] as Provider[],
-  secret:process.env.NEXTAUTH_SECRET,
+        await dbConnect();
+        const user = await UserModel.findOne({ username: credentials.username });
+
+        if (user && user.password === credentials.password) {
+          return {
+            id: user._id,
+            name: user.username,
+            email: user.email,
+            image: "",
+          }
+        } else {
+          return null;
+        }
+      },
+    }),
+  ],
+  secret: process.env.NEXT_AUTH_SECRET,
   session:{
     strategy:"jwt",
     maxAge:30*24*60*60,
   },
-  jwt:{
-    encryption:true
-  },
-  callbacks:{
-    
-    async signIn(user:any, account:any,credentials:any) {
-      if (user.account.provider === 'google') {
-        // Handle Google authentication
-        const { name, email, image } = user.user;
-    
-        // Check if the user already exists
+  callbacks: {
+    async signIn(user: any, account: any, credentials: any) {
+      // Your signIn logic here
+      if (user?.account?.provider === 'google') {
+        const { name, email } = user.user;
+
         await dbConnect();
         const existingUser = await UserModel.findOne({ username: name });
-    
+
         if (existingUser) {
           return {
             name: name,
             email: email,
-            image: image,
-          }; // User already exists, do not proceed with sign-up
+          };
         } else {
           const newUser = new UserModel({
             username: name,
             email: email,
-            image: image,
             password: " ", // Add your logic for setting the password
           });
-    
+
           await newUser.save();
-    
+
           return {
             name: name,
-            email: email,
-            image: image,
+            email: email
           };
         }
-      }else{
-        const { name, email, image } = user.user;
-        return{
-          name: name,
+      } else {
+        const { name, email } = user.user;
+        return {
+          name:name,
           email: email,
-          image: image,
-        }
+        };
       }
     },
-  }
-}
+  },
+};
 
 export default NextAuth(authOptions);
