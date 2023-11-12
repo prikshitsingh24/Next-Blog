@@ -9,7 +9,7 @@ interface Data {
     author:string;
   }
 
-export default function Template({data,id}){
+export default function Template({data,id}:any){
     return(
         <div className="bg-darkgrey text-white rounded-md mx-5 px-10 py-3 my-1">
             <div className="text-xl my-2">{data.title}</div>

@@ -26,7 +26,23 @@ const MarkdownRenderer = ({ content }: Content) => {
       // Image link
       const imageUrl = line.substring(9, line.length - 1);
       return <img key={index} src={imageUrl} alt="Image" />;
-    } 
+    }else if (line.match(/\[.*\]\(.*\)/)) {
+      // Link (early phase)
+      const linkText = line.match(/\[(.*?)\]/)[1];
+      const linkUrl = line.match(/\((.*?)\)/)[1];
+      return (
+        <a key={index} href={linkUrl} target="_blank" className='underline text-blue-500'>
+          {linkText}
+        </a>
+      );
+    }else if (line.startsWith('* ') || line.startsWith('- ')) {
+      // Unordered list item
+      return <li key={index}>{line.substring(2)}</li>;
+    }
+    else if (line.trim() === '') {
+      // Empty line (considering spaces)
+      return <p key={index}>&nbsp;</p>;
+    }
     else {
       // Regular sentence
       const words = line.split(/(\s+)/);
