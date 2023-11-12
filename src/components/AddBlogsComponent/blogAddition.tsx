@@ -109,7 +109,7 @@ export default function BlogAdditionComponent() {
             type="text"
             id="title"
             className="py-2 px-3 w-full rounded border-gray-300 outline-none"
-            value={session?.user?.name}
+            value={session?.user?.name || ''}
             readOnly={true}
           />
         </div>
