@@ -2,6 +2,6 @@
 
 export default function Settings(){
     return (
-        <div>Settings page is here</div>
+        <div>Settings page comming soon</div>
     );
 }
