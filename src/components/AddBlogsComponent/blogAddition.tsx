@@ -27,7 +27,7 @@ export default function BlogAdditionComponent() {
     if(title=="" && markdown=="" && author==""){
       alert("please fill all the fields");
     }else{
-      const response=await fetch(`${process.env.VERCEL_PUBLIC_URL}/api/postBlogs`,{
+      const response=await fetch(`${process.env.VERCEL_PUBLIC_URL}api/postBlogs`,{
         method:'POST',
         headers:{
           'Content-Type':'application/json',
@@ -35,7 +35,6 @@ export default function BlogAdditionComponent() {
         body:JSON.stringify({title:title,description:markdown,author:author}),
       });
       if(response.ok){
-        const data=await response.json();
         setPopUp(false);
         router.push('/Home');
       }else{
