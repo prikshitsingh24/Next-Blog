@@ -16,9 +16,8 @@ export default function Home() {
     if(session){
       router.push("/Home");
   }else{
-    setTimeout(()=>{
+    
       router.push('/Login');
-    },100)
   }
   }
     
