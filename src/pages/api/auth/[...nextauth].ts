@@ -6,6 +6,7 @@ import { UserModel } from "../database/mongodb";
 import dbConnect from "../database/connection";
 import { NextApiRequest, NextApiResponse } from "next";
 import { AuthOptions, SessionStrategy } from 'next-auth';
+import { signIn } from "next-auth/react";
 
 
 export const authOptions:AuthOptions = {
@@ -48,42 +49,28 @@ export const authOptions:AuthOptions = {
     maxAge:30*24*60*60,
   },
   callbacks: {
-    async signIn(user: any, account: any, credentials: any) {
-      // Your signIn logic here
-      if (user?.account?.provider === 'google') {
-        const { name, email } = user.user;
+    async signIn(params){
+      const {user,account,profile}=params;
+      if(account?.provider==="google"){
+        const { name, email } = user;
 
         await dbConnect();
         const existingUser = await UserModel.findOne({ username: name });
-
-        if (existingUser) {
-          return {
-            name: name,
-            email: email,
-          };
-        } else {
-          const newUser = new UserModel({
-            username: name,
-            email: email,
-            password: " ", // Add your logic for setting the password
+        if(existingUser){
+          return true;
+        }else{
+          const newUser=new UserModel({
+            username:name,
+            email:email,
+            password:" "
           });
-
           await newUser.save();
-
-          return {
-            name: name,
-            email: email
-          };
+          return true
         }
-      } else {
-        const { name, email } = user.user;
-        return {
-          name:name,
-          email: email,
-        };
       }
-    },
-  },
-};
+      return true;
+    }
+  }
+}
 
 export default NextAuth(authOptions);
