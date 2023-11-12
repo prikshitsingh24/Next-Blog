@@ -68,7 +68,7 @@ export const authOptions:AuthOptions = {
           return true
         }
       }
-      return true;
+      return false;
     }
   }
 }
