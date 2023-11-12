@@ -90,7 +90,7 @@ export async function getServerSideProps(context:any) {
         }
       }
     }
-    const response = await fetch('http://localhost:3000/api/postBlogs?limit=10');
+    const response = await fetch(`${process.env.NEXT_BLOGS_URL}/api/postBlogs?limit=10`);
     const data = await response.json() as Data;
     console.log(session);
     return {

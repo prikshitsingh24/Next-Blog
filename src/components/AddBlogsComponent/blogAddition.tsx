@@ -27,7 +27,7 @@ export default function BlogAdditionComponent() {
     if(title=="" && markdown=="" && author==""){
       alert("please fill all the fields");
     }else{
-      const response=await fetch('http://localhost:3000/api/postBlogs',{
+      const response=await fetch(`${process.env.NEXT_BLOGS_URL}/api/postBlogs`,{
         method:'POST',
         headers:{
           'Content-Type':'application/json',

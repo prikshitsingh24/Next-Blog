@@ -1,7 +1,6 @@
 
-import { getServerSession } from "next-auth";
 import BlogTemplate from "../../components/blogTemplate";
-import { authOptions } from "../api/auth/[...nextauth]";
+
 
 
 export default function BlogDetailPage({data}:any){
@@ -20,7 +19,7 @@ export async function getServerSideProps(context: { query: { id: any; }; }) {
     try {
     // Fetch blog data based on the slug
     // Replace this with your actual data fetching code
-    const response = await fetch(`http://localhost:3000/api/getBlogById?id=${id}`);
+    const response = await fetch(`${process.env.NEXT_BLOGS_URL}/api/getBlogById?id=${id}`);
     if (!response.ok) {
       // Handle the case where the blog post is not found
       return { props: { data: null } };
