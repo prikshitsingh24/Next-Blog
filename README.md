@@ -1,4 +1,14 @@
-## Next-Blog
+<h3 align="center">Next-Blogs</h3>
+ <p align="center">
+    The open-source Blogging website.
+    <br />
+     ·
+    <a href="https://next-blogs-delta-ecru.vercel.app/">Website</a>
+    ·
+  </p>
+</p>
+
+****
 ### Project Description:
 NextBlog is an open-source blogging platform built with Next.js, designed to empower users to create and manage their own blogs with ease. Whether you're a passionate writer, an expert in a particular field, or just want to share your thoughts and experiences with the world, NextBlog provides the perfect platform to do so. This GitHub project serves as the central hub for the development and collaboration surrounding NextBlog.
 
