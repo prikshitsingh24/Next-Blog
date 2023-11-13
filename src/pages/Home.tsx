@@ -93,10 +93,11 @@ export default function Blogs({data,session}:any){
            <div className="px-10 text-xl">Blogs</div>
            {blogSearch===''?(reverseData.map(x=>{
             return <Template key={x._id} id={x._id} data={x}></Template>
-           })):(
-            (searchDataList.map(x=>{
+           })):(searchDataList.length!=0?(searchDataList.map(x=>{
               return <Template key={x._id} id={x._id} data={x}></Template>
-             }))
+             })):(
+              <div></div>
+             )
            )
            }
           </div>
