@@ -10,16 +10,16 @@ import Template from "../components/template";
 import { userInfoState } from "../states/atoms/userInfo";
 import CategoriesPanel from "../components/categoriesPanel";
 interface Data {
-    title: string;
-    description: string;
-    author:string;
-  
-  }
+  _id: string; // Update with the actual type of _id
+  title: string;
+  description: string;
+  author: string;
+}
 
 
 export default function Blogs({data,session}:any){
   const router=useRouter();
-  const [searchDataList, setSearchDataList] = useState([]); 
+  const [searchDataList, setSearchDataList] = useState<Data[]>([]); 
   const [blogSearch,setBlogSearch]=useState('');
   const[userInfo,setUserInfo]=useRecoilState(userInfoState);
   const reverseData=[...data].reverse();
