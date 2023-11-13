@@ -21,7 +21,7 @@ const MarkdownRenderer = ({ content }: Content) => {
       return <h4 key={index} className="text-sm">{line.substring(5)}</h4>;
     }else if (line.startsWith('***')) {
       // Header
-      return <div className='w-full border-t border-white my-3'></div>;
+      return <div key={index} className='w-full border-t border-white my-3'></div>;
     }else if (line.startsWith('![image](') && line.endsWith(')')) {
       // Image link
       const imageUrl = line.substring(9, line.length - 1);

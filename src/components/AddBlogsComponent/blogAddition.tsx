@@ -6,6 +6,20 @@ import { useSession } from "next-auth/react";
 import ErrorComponent from "../errorComponent";
 import MarkdownRenderer from "./markdownComponent";
 
+const categories = [
+  'Food',
+  'Travel',
+  'Movie',
+  'News',
+  'Fashion',
+  'Sports',
+  'Political',
+  'Religion',
+  'Health and Fitness',
+  'Video Game',
+  'Anime',
+];
+
 export default function BlogAdditionComponent() {
   const {data:session}=useSession();
   const[title,setTitle]=useState("");
@@ -13,6 +27,7 @@ export default function BlogAdditionComponent() {
   const [popUp,setPopUp]=useState(false);
   const [markdown,setMarkdown]=useState("");
   const author=session?.user?.name;
+  const [selectedCategory,setSelectedCategory]=useState('')
 
   const router=useRouter();
 
@@ -22,9 +37,11 @@ export default function BlogAdditionComponent() {
   const handleMarkdownChange=(e:any)=>{
     setMarkdown(e.target.value);
   }
-
+  const handleCategoryChange=(e:any)=>{
+    setSelectedCategory(e.target.value);
+  }
   const handleSubmit=async()=>{
-    if(title=="" && markdown=="" && author==""){
+    if(title=="" && markdown=="" && author=="" && selectedCategory==""){
       alert("please fill all the fields");
     }else{
       const response=await fetch(`https://next-blogs-delta-ecru.vercel.app/api/postBlogs`,{
@@ -32,7 +49,7 @@ export default function BlogAdditionComponent() {
         headers:{
           'Content-Type':'application/json',
         },
-        body:JSON.stringify({title:title,description:markdown,author:author}),
+        body:JSON.stringify({title:title,description:markdown,author:author,category:selectedCategory}),
       });
       if(response.ok){
         setPopUp(false);
@@ -112,7 +129,32 @@ export default function BlogAdditionComponent() {
             readOnly={true}
           />
         </div>
-        <Button variant="contained" color="success" onClick={handleSubmit}>
+        <div className="my-2">
+        <div className="border px-2 py-2 border-black rounded-xl px-5">
+        <label htmlFor="category" className="text-white">Choose a category:</label>
+        <select
+          id="category"
+          name="category"
+          value={selectedCategory}
+          onChange={handleCategoryChange}
+          className="block w-full p-2 mt-1 border rounded-md my-2"
+        >
+          <option value="">Select a category</option>
+          {categories.map((category) => (
+            <option key={category} value={category}>
+              {category}
+            </option>
+          ))}
+        </select>
+        {selectedCategory && (
+          <div>
+            <p className="text-white">Selected Category: {selectedCategory}</p>
+            {/* Render other components or perform actions based on the selected category */}
+          </div>
+        )}
+      </div>
+        </div>
+        <Button variant="contained" color="success" onClick={handleSubmit} className="my-2">
           Add Blog
         </Button>
       </div>

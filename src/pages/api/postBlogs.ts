@@ -14,10 +14,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.status(500).json({ error: 'Internal server error' });
       }
     } else if (req.method === 'POST') {
-      const { title, description, author } = req.body;
+      const { title, description, author, category } = req.body;
       
       try {
-        const newBook = new BookModel({ title, description, author });
+        const newBook = new BookModel({ title, description, author, category });
         await newBook.save();
         
         // Assuming you have the userId available (the ID of the user)

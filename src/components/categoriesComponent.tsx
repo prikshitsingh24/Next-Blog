@@ -1,8 +1,10 @@
+import Link from "next/link";
 
 
 
 export default function Category(props:any){
     return(
+        <Link href={`/category/${props.title}`}>
         <div className="my-5 mx-5 border border-black rounded-md w-40 h-10 relative overflow-hidden hover:transform hover:scale-105 transition-transform duration-300 hover:cursor-pointer">
     <div className="w-40 h-20">
         <img src={props.imageUrl} alt={props.title} className="w-full h-full object-cover object-center"  style={{ filter: 'brightness(70%)' }} />
@@ -12,6 +14,7 @@ export default function Category(props:any){
         <div className="text-white text-xl font-semibold text-center z-10 relative">{props.title}</div>
     </div>
 </div>
+        </Link>
 
 
 
