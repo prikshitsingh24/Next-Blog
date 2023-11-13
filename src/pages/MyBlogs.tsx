@@ -1,11 +1,41 @@
 
 import { getServerSession } from "next-auth/next";
 import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 import Template from "../components/template";
 import { authOptions } from "./api/auth/[...nextauth]";
 
 export default function MyBlogs({userBlogs}:any){
     const reverseData=[...userBlogs].reverse();
+    const [searchDataList, setSearchDataList] = useState([]); 
+    const [blogSearch,setBlogSearch]=useState('');
+
+    const handleBlogSearch=(e:any)=>{
+      setBlogSearch(e.target.value);
+      
+    }
+
+
+    useEffect(()=>{
+      const fetchBlogs=async()=>{
+        try{
+          const response=await fetch(`https://next-blogs-delta-ecru.vercel.app/api/getBlogByTitle?title=${blogSearch}`);
+          const data = await response.json();
+          if(data){
+            console.log("this is data array: ",[data]);
+            setSearchDataList(data);
+          }else{
+            console.log("didnt work")
+          }
+        }catch(error){
+          console.log(error)
+        }
+      }
+      if (blogSearch.trim() !== '') {
+        fetchBlogs();
+      }
+    },[blogSearch]);
+  
     return(
         <div className="bg-Beige h-screen overflow-auto overflow-x-hidden ">
             <div className="relative flex justify-center item-center">
@@ -19,12 +49,16 @@ export default function MyBlogs({userBlogs}:any){
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5 my-2 mx-2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
-            <input className="rounded-xl border-none w-full outline-none px-5" placeholder="Search all the blog you you have written!!" />
+            <input className="rounded-xl border-none w-full outline-none px-5" placeholder="Search all the blog you you have written!!" onChange={handleBlogSearch} />
             </div>
           </div>
-          {reverseData.map(x=>{
+          {blogSearch===''?(reverseData.map(x=>{
             return <Template key={x._id} id={x._id} data={x}></Template>
-           })}
+           })):(
+            (searchDataList.map(x=>{
+              return <Template key={x._id} id={x._id} data={x}></Template>
+             }))
+           )}
         </div>
         
     );

@@ -19,6 +19,8 @@ interface Data {
 
 export default function Blogs({data,session}:any){
   const router=useRouter();
+  const [searchDataList, setSearchDataList] = useState([]); 
+  const [blogSearch,setBlogSearch]=useState('');
   const[userInfo,setUserInfo]=useRecoilState(userInfoState);
   const reverseData=[...data].reverse();
   const handleLogout=()=>{
@@ -27,6 +29,31 @@ export default function Blogs({data,session}:any){
   const handleSettings=()=>{
     router.push('/Settings');
   }
+
+  const handleBlogSearch=(e:any)=>{
+    setBlogSearch(e.target.value);
+    
+  }
+
+  useEffect(()=>{
+    const fetchBlogs=async()=>{
+      try{
+        const response=await fetch(`https://next-blogs-delta-ecru.vercel.app/api/getBlogByTitle?title=${blogSearch}`);
+        const data = await response.json();
+        if(data){
+          console.log("this is data array: ",[data]);
+          setSearchDataList(data);
+        }else{
+          console.log("didnt work")
+        }
+      }catch(error){
+        console.log(error)
+      }
+    }
+    if (blogSearch.trim() !== '') {
+      fetchBlogs();
+    }
+  },[blogSearch]);
 
   
     return(
@@ -58,15 +85,20 @@ export default function Blogs({data,session}:any){
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 my-2 mx-2">
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
-            <input className="rounded-xl border-none w-full outline-none px-5" placeholder="Search the blog you desire!!" />
+            <input className="rounded-xl border-none w-full outline-none px-5" placeholder="Search the blog you desire!!" onChange={handleBlogSearch} />
             </div>
           </div>
           <div className="bg-Beige grid grid-cols-12 my-5" >
           <div className="col-span-12 md:col-span-12 lg:col-span-8">
            <div className="px-10 text-xl">Blogs</div>
-           {reverseData.map(x=>{
+           {blogSearch===''?(reverseData.map(x=>{
             return <Template key={x._id} id={x._id} data={x}></Template>
-           })}
+           })):(
+            (searchDataList.map(x=>{
+              return <Template key={x._id} id={x._id} data={x}></Template>
+             }))
+           )
+           }
           </div>
           <div className="col-span-12 md:col-span-0 lg:col-span-4  mx-10 my-5">
           <CategoriesPanel></CategoriesPanel>

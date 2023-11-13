@@ -25,7 +25,7 @@ export default function CategoriesPanel(){
                 Categories
             </div>
             <div className="border px-2 py-2 border-black rounded-xl px-5 ">
-                <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 pr-6 2xl:grid-cols-3 gap-4 pr-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-1 xl:grid-cols-2 gap-4 pr-6 2xl:grid-cols-3 gap-4 pr-6">
                     {
                         categoryObject.map((category: Category,index: number)=>{
                             return <Category key={index} title={category.title} imageUrl={category.imageUrl}></Category>
