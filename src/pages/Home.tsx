@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import Appbar from "../components/appbar";
 import Template from "../components/template";
 import { userInfoState } from "../states/atoms/userInfo";
+import CategoriesPanel from "../components/categoriesPanel";
 interface Data {
     title: string;
     description: string;
@@ -29,7 +30,7 @@ export default function Blogs({data,session}:any){
 
   
     return(
-        <div className="bg-Beige h-screen w-screen">
+        <div className="bg-Beige h-screen overflow-auto w-screen overflow-x-hidden">
           {session ?(
           <Appbar username={session.user.name}></Appbar>
 
@@ -68,7 +69,7 @@ export default function Blogs({data,session}:any){
            })}
           </div>
           <div className="col-span-12 md:col-span-0 lg:col-span-4  mx-10 my-5">
-          <div>Hello!!</div>
+          <CategoriesPanel></CategoriesPanel>
           </div>
            </div>
           </div>
