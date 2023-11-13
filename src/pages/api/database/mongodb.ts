@@ -1,10 +1,24 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
+const categoriesList = [
+  'Food',
+  'Travel',
+  'Movie',
+  'News',
+  'Fashion',
+  'Sports',
+  'Political',
+  'Religion',
+  'Health and Fitness',
+  'Video Game',
+  'Anime',
+];
 // Define the interface for the document
 interface IBook extends Document {
   title: string;
   description: string;
   author: string;
+  category: typeof categoriesList[number];
 }
 
 interface UserDetails{
@@ -30,6 +44,16 @@ const bookSchema = new Schema<IBook>({
     required: true,
     trim: true,
   },
+  category:{
+    type: String,
+    required:true,
+    trim: true,
+    validate: {
+      validator: (value: string) => categoriesList.includes(value),
+      message: 'Invalid category.',
+    },
+  }
+  
 });
 
 const userSchema=new Schema<UserDetails>({

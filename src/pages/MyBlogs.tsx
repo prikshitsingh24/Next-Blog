@@ -7,12 +7,13 @@ import { authOptions } from "./api/auth/[...nextauth]";
 export default function MyBlogs({userBlogs}:any){
     const reverseData=[...userBlogs].reverse();
     return(
-        <div className="bg-Beige h-screen ">
+        <div className="bg-Beige h-screen overflow-auto overflow-x-hidden ">
             <div className="relative flex justify-center item-center">
-            <div className="text-3xl my-10">
+            <div className="text-3xl my-5">
                 Your Blogs!!!
             </div>
         </div>
+        <div className="border-t border-2 border-black my-2 mx-10"></div>
         <div className="relative flex justify-center item-center my-5 rounded-xl">
             <div className="flex bg-white w-96 rounded-xl">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5 my-2 mx-2">

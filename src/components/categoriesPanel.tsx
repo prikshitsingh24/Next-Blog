@@ -16,7 +16,7 @@ export default function CategoriesPanel(){
             {title:'Political',imageUrl:'https://th.bing.com/th/id/OIP.4NSSNB2ugUi5QWpFDT5lUQHaF9?pid=ImgDet&rs=1'},
             {title:'Religion',imageUrl:'https://www.learnreligions.com/thmb/2kKkO-gIIzcuFoxQXg7p4h3e7bQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/WorldReligions-164107922-c72cce704d4d4521962046df4fa8ce3f.jpg'},
             {title:'Health & Fitness',imageUrl:'https://media.istockphoto.com/id/1363588189/photo/healthy-lifestyle-on-ketogenic-diet-eating-clean-keto-food-good-health-dietary-in-heart-dish.jpg?s=612x612&w=0&k=20&c=RVW_a2Bq3eYeUWqkUbTUHkiQbGJaAMa9Q2fyljGymgY='},
-            {title:'Video Games',imageUrl:'https://media.istockphoto.com/id/1324673294/photo/video-gaming-console-man-playing-rpg-strategy-game.jpg?s=612x612&w=0&k=20&c=hTsYdDLbNKnE5gxeY8Yc4-5drqzsK2DiYzu1vdkMAOI='},
+            {title:'Video Game',imageUrl:'https://media.istockphoto.com/id/1324673294/photo/video-gaming-console-man-playing-rpg-strategy-game.jpg?s=612x612&w=0&k=20&c=hTsYdDLbNKnE5gxeY8Yc4-5drqzsK2DiYzu1vdkMAOI='},
             {title:'Anime',imageUrl:'https://resize.indiatvnews.com/en/resize/newbucket/1080_-/2023/06/anime-series-for-summers-1686311761.jpg'},
             ]
     return(
@@ -27,8 +27,8 @@ export default function CategoriesPanel(){
             <div className="border px-2 py-2 border-black rounded-xl px-5 ">
                 <div className="grid grid-cols-1 xl:grid-cols-2 gap-4 pr-6 2xl:grid-cols-3 gap-4 pr-6">
                     {
-                        categoryObject.map((category: Category)=>{
-                            return <Category title={category.title} imageUrl={category.imageUrl}></Category>
+                        categoryObject.map((category: Category,index: number)=>{
+                            return <Category key={index} title={category.title} imageUrl={category.imageUrl}></Category>
                         })
                     }
                 </div>
