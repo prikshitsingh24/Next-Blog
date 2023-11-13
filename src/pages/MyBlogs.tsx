@@ -5,9 +5,16 @@ import { useEffect, useState } from "react";
 import Template from "../components/template";
 import { authOptions } from "./api/auth/[...nextauth]";
 
+interface Data {
+  _id: string; // Update with the actual type of _id
+  title: string;
+  description: string;
+  author: string;
+}
+
 export default function MyBlogs({userBlogs}:any){
     const reverseData=[...userBlogs].reverse();
-    const [searchDataList, setSearchDataList] = useState([]); 
+    const [searchDataList, setSearchDataList] = useState<Data[]>([]); 
     const [blogSearch,setBlogSearch]=useState('');
 
     const handleBlogSearch=(e:any)=>{
