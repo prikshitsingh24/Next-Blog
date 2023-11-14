@@ -66,7 +66,7 @@ export default function BlogAdditionComponent() {
   }
 
   return (
-    <div className="bg-Beige p-8 flex-column justify-center items-center h-full w-full overflow-auto">
+    <div className="bg-Beige p-8 flex-column justify-center items-center h-screen w-full overflow-auto">
         <div className="text-black text-xl my-5">Your Blog</div>
       <div className="bg-darkgrey p-2 rounded shadow-md w-full">
         {popUp ?(
