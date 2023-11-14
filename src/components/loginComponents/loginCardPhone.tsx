@@ -96,7 +96,7 @@ export default function LoginCardPhone(){
 
     
     return(
-        <div>
+        <div className=" overflow-hidden ">
             <div className="bg-darkgrey w-screen h-screen overflow-hidden rounded-md">
                 <div className="relative flex justify-center item-center">
                 <div className="py-5 text-2xl text-white">Next-Blog</div>

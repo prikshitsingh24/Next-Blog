@@ -9,6 +9,8 @@ import Appbar from "../components/appbar";
 import Template from "../components/template";
 import { userInfoState } from "../states/atoms/userInfo";
 import CategoriesPanel from "../components/categoriesPanel";
+import { useMediaQuery } from "@mui/material";
+import { sideBarStatus } from "../states/atoms/sidebarStatus";
 interface Data {
   _id: string; // Update with the actual type of _id
   title: string;
@@ -20,8 +22,10 @@ interface Data {
 export default function Blogs({data,session}:any){
   const router=useRouter();
   const [searchDataList, setSearchDataList] = useState<Data[]>([]); 
+  const isDesktop = useMediaQuery('(min-width:768px)');
   const [blogSearch,setBlogSearch]=useState('');
   const[userInfo,setUserInfo]=useRecoilState(userInfoState);
+  const[sidebarStatus,setSideBarStatus]=useRecoilState(sideBarStatus);
   const reverseData=[...data].reverse();
   const handleLogout=()=>{
     signOut();
@@ -32,6 +36,12 @@ export default function Blogs({data,session}:any){
 
   const handleBlogSearch=(e:any)=>{
     setBlogSearch(e.target.value);
+    
+  }
+
+  const handleHomeUi=()=>{
+    setSideBarStatus(false);
+    setUserInfo(false);
     
   }
 
@@ -79,7 +89,7 @@ export default function Blogs({data,session}:any){
           ):(
             <div></div>
           )}
-          <div onClick={()=>setUserInfo(false)}>
+          <div onClick={handleHomeUi}>
           <div className="relative flex justify-center item-center my-5 rounded-xl">
             <div className="flex bg-white w-96 rounded-xl">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 my-2 mx-2">
@@ -100,9 +110,14 @@ export default function Blogs({data,session}:any){
            )
            }
           </div>
-          <div className="col-span-12 md:col-span-0 lg:col-span-4  mx-10 my-5">
-          <CategoriesPanel></CategoriesPanel>
-          </div>
+          {isDesktop ? (
+            <div className="col-span-12 md:col-span-0 lg:col-span-4  mx-10 my-5">
+            <CategoriesPanel></CategoriesPanel>
+            </div>
+          ) : (
+            <div></div>
+          )}
+         
            </div>
           </div>
            </div>
