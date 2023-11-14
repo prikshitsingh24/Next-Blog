@@ -18,7 +18,7 @@ export default function Sidebar(){
         >
           <div className="px-6 py-4">
             <div>
-                <h1 className="text-xl">Hello {session.user?.name ?? " "},</h1>
+                <h1 className="text-xl">Hello {session?.user?.name ?? " "},</h1>
                 <div className="border border-black w-full"></div>
                 <div>
                 <ButtonX text={"Home"} icon={'./home.png'} goTo={()=>router.push('/Home')}></ButtonX>
