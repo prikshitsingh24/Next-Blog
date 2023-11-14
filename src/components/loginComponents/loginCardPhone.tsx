@@ -1,15 +1,13 @@
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import styled from "styled-components";
 import ErrorComponent from "../errorComponent";
 import GithubButton from "./githubButton";
 import GoogleButton from "./googleButton";
 
 
-
-export default function LoginCard(){
+export default function LoginCardPhone(){
     const router=useRouter();
     const[popUp,setPopUp]=useState(false);
     const[error,setError]=useState("");
@@ -98,8 +96,8 @@ export default function LoginCard(){
 
     
     return(
-        <div className="my-20 h-screen overflow-hidden ">
-            <div className="bg-darkgrey w-110 h-110 rounded-md">
+        <div>
+            <div className="bg-darkgrey w-screen h-screen overflow-hidden rounded-md">
                 <div className="relative flex justify-center item-center">
                 <div className="py-5 text-2xl text-white">Next-Blog</div>
                 </div>
@@ -180,5 +178,3 @@ export default function LoginCard(){
         </div>
     );
 }
-
-
