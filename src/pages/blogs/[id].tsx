@@ -4,9 +4,8 @@ import BlogTemplate from "../../components/blogTemplate";
 
 
 export default function BlogDetailPage({data}:any){
-
     return(
-      <div className="bg-Beige h-screen">
+      <div className="bg-Beige h-screen overflow-auto">
         <BlogTemplate data={data}/>
       </div>
         
