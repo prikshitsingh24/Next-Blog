@@ -4,16 +4,24 @@ import ButtonX from "../Buttons/buttons";
 import AddComment from "./addComment";
 import ReplyComment from "./replyComment";
 
+interface ReplyType{
+    _id:string;
+    blogId:string;
+    text:string;
+    user:string;
+    replies:[];
+}
 export default function ReplyCommentTile({data}:any){
     const replyId=data;
-    const [replyData,setReplyData]=useState([]);
+    const [replyData,setReplyData]=useState<ReplyType[]>([]);
     useEffect(()=>{
         const handleReplyComments=async ()=>{
             const response=await fetch(`https://next-blogs-delta-ecru.vercel.app/comments?commentId=${replyId}`)
-            const data=await response.json();
+            const data:ReplyType=await response.json();
             if(data){
-                console.log([data]);
                 setReplyData([data]);
+            }else{
+                console.log("no comments found");
             }
 
         }
