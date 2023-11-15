@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import mongoose, { Schema, Document, Types } from 'mongoose';
 
 const categoriesList = [
   'Food',
@@ -26,6 +26,14 @@ interface UserDetails{
   email:string;
   password:string;
   blogs:[]
+}
+
+interface Comment{
+  blogId:Types.ObjectId;
+  text:string;
+  user:string;
+  parentCommentId:Types.ObjectId
+  replies:[]
 }
 // Define the schema
 const bookSchema = new Schema<IBook>({
@@ -72,8 +80,18 @@ const userSchema=new Schema<UserDetails>({
   blogs: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }]
 
 });
+
+const commentSchema=new Schema<Comment>({
+  blogId:{type:mongoose.Schema.Types.ObjectId,ref:'Books',required:true},
+  text:{type:String,required:true},
+  user:{type:String,required:true},
+  parentCommentId:{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' },
+  replies:[{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
+
+})
 // Create and export the model
 const BookModel = mongoose.models.Book || mongoose.model<IBook>('Book', bookSchema);
 const UserModel=mongoose.models.User || mongoose.model<UserDetails>('User',userSchema);
+const CommentModel=mongoose.models.Comment || mongoose.model<Comment>('Comment',commentSchema);
 
-export {BookModel,UserModel};
+export {BookModel,UserModel,CommentModel};
