@@ -16,12 +16,12 @@ export default function CommentTile({data}:any){
         <div>
             {
                 !data.parentCommentId && (
-                    <div className="mb-8">
+                    <div className="mb-8 px-5">
             <div className="flex mb-2">
-            <div className="w-14 h-14 mx-4 bg-black rounded-full flex items-center justify-center"></div>
+            <div className="w-14 h-14 px-6 bg-black rounded-full flex items-center justify-center"></div>
             <div className="flex-column">
                 <div className="text-xs">{data.user}</div>
-                <div className="text-sm py-2">{data.text}</div>
+                <div className="text-sm py-2 px-2">{data.text}</div>
             </div>
             </div>
             <div className="pl-10"> 
