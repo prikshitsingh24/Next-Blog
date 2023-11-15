@@ -13,7 +13,9 @@ export default function Appbar(props:any) {
   const[sidebarStatus,setSideBarStatus]=useRecoilState(sideBarStatus);
   const isSmScreen = useMediaQuery('(max-width: 862px)');
   const handleUserInfo=()=>{
-    setUserInfo(!userInfo);
+    if(!isSmScreen){
+      setUserInfo(!userInfo);
+    }
   }
   const handleSideBar=()=>{
     setSideBarStatus(!sidebarStatus);
