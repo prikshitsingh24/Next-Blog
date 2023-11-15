@@ -12,12 +12,12 @@ interface ReplyType{
     replies:[];
 }
 export default function ReplyCommentTile({data}:any){
-    const replyId=data;
+    const replyId:string=data;
     const [replyData,setReplyData]=useState<ReplyType[]>([]);
     useEffect(()=>{
         const handleReplyComments=async ()=>{
-            const response=await fetch(`https://next-blogs-delta-ecru.vercel.app/comments?commentId=${replyId}`)
-            const data:ReplyType=await response.json();
+            const response=await fetch(`https://next-blogs-delta-ecru.vercel.app/api/comments?commentId=${replyId}`)
+            const data=await response.json();
             if(data){
                 setReplyData([data]);
             }else{
