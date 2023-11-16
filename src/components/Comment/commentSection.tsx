@@ -13,7 +13,7 @@ interface CommentType{
 
 export default function CommentSection({data}:any){
     const id=data._id;
-    const [comments,setComments]=useState([]);
+    const [comments,setComments]=useState<CommentType[]>([]);
     useEffect(()=>{
      const handleCommentData=async()=>{
         const response=await fetch(`${process.env.NEXT_PUBLIC_URL}/api/comments?blogId=${id}`);
@@ -27,7 +27,7 @@ export default function CommentSection({data}:any){
  
      const handleSocketNewComment = (newComment:CommentType) => {
         // Update UI based on the newComment received
-        setComments((prevComments): CommentType[] => [...prevComments, newComment]);
+        setComments((prevComments:CommentType[]): CommentType[] => [...prevComments, newComment]);
       };
   
       handleCommentData();
