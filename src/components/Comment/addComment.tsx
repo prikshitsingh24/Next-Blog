@@ -13,7 +13,6 @@ export default function AddComment({data}:any){
     }
 
     const handleCommentPost=async()=>{
-        console.log(process.env.VERCEL_PUBLIC_URL);
         if(text==''){
             console.log('error please fill the comment');
         }else{
