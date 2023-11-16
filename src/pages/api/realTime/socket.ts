@@ -1,6 +1,6 @@
 import { Server } from 'socket.io';
 
-export default function createSocket(server) {
+export default function createSocket(server:any) {
   const io = new Server(server, {
     cors: {
       origin: `${process.env.NEXT_PUBLIC_URL}`,
