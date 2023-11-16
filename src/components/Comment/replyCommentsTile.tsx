@@ -1,8 +1,4 @@
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import ButtonX from "../Buttons/buttons";
-import AddComment from "./addComment";
-import ReplyComment from "./replyComment";
 
 interface ReplyType{
     _id:string;
@@ -17,7 +13,6 @@ export default function ReplyCommentTile({data}:any){
     useEffect(()=>{
         const handleReplyComments=async ()=>{
             const response=await fetch(`${process.env.NEXT_PUBLIC_URL}/api/comments?commentId=${replyId}`);
-            console.log("url",process.env.VERCEL_PUBLIC_URL);
             const data=await response.json();
             if(data){
                 setReplyData([data]);
@@ -26,8 +21,9 @@ export default function ReplyCommentTile({data}:any){
             }
 
         }
+       
         handleReplyComments();
-    },[])
+    },[replyId])
 
     return(
         <div>

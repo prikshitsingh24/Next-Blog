@@ -1,10 +1,24 @@
+import { createServer } from "http";
 import { NextApiRequest, NextApiResponse } from "next";
 import dbConnect from "./database/connection";
 import { BookModel, CommentModel, UserModel } from "./database/mongodb";
+import createSocket from "./realTime/socket";
+
+const httpServer = createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('okay');
+});
+
+const io = createSocket(httpServer);
+
+// Start the HTTP server to listen on a specific port
+const PORT =80;
+httpServer.listen(PORT, () => {
+  console.log(`Server is running on ${process.env.NEXT_PUBLIC_URL}:${PORT}`);
+});
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-    await dbConnect();
-    
+  await dbConnect();
     if (req.method === 'GET') {
         const { blogId, commentId } = req.query;
 
@@ -41,11 +55,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 if(newComment){
                     reply.replies.push(newComment._id);
                     await reply.save();
+                    io.emit('comment',newComment);
                 }
                 res.status(201).json({message:'new comment created successfully'})
             }else{
                 const newParentComment=new CommentModel({blogId:blogId,text:text,user:user})
                 await newParentComment.save();
+                if(newParentComment){
+                  io.emit('newParentComment',newParentComment);
+                }
                 res.status(201).json({message:'new parent comment created successfully'})
             }
         }catch(error){
@@ -58,3 +76,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
   }
 }
+
+
+
+export { httpServer as server };
