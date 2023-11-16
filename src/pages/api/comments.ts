@@ -1,7 +1,5 @@
 import { createServer } from "http";
 import { NextApiRequest, NextApiResponse } from "next";
-import { Oi } from "next/font/google";
-import { Server } from "socket.io";
 import dbConnect from "./database/connection";
 import { BookModel, CommentModel, UserModel } from "./database/mongodb";
 import createSocket from "./realTime/socket";
