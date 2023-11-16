@@ -19,7 +19,7 @@ export default function CommentSection({data}:any){
         }
      }
  
-     const handleSocketNewComment = (newComment) => {
+     const handleSocketNewComment = (newComment:any) => {
         // Update UI based on the newComment received
         setComments((prevComments) => [...prevComments, newComment]);
       };
