@@ -16,7 +16,8 @@ export default function ReplyCommentTile({data}:any){
     const [replyData,setReplyData]=useState<ReplyType[]>([]);
     useEffect(()=>{
         const handleReplyComments=async ()=>{
-            const response=await fetch(`https://next-blogs-delta-ecru.vercel.app/api/comments?commentId=${replyId}`)
+            const response=await fetch(`${process.env.NEXT_PUBLIC_URL}/api/comments?commentId=${replyId}`);
+            console.log("url",process.env.VERCEL_PUBLIC_URL);
             const data=await response.json();
             if(data){
                 setReplyData([data]);

@@ -8,7 +8,7 @@ export default function CommentSection({data}:any){
     const [comments,setComments]=useState([]);
     useEffect(()=>{
      const handleCommentData=async()=>{
-        const response=await fetch(`https://next-blogs-delta-ecru.vercel.app/api/comments?blogId=${id}`);
+        const response=await fetch(`${process.env.NEXT_PUBLIC_URL}/api/comments?blogId=${id}`);
         const data=await response.json();
         if(data){
             setComments(data.comments);
