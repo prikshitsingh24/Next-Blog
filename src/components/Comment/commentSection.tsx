@@ -3,7 +3,13 @@ const io = (await import("socket.io-client")).default;
 import AddComment from "./addComment";
 import CommentTile from "./commentsTile";
 
-
+interface CommentType{
+    _id:string;
+    blogId:string;
+    text:string;
+    user:string;
+    replies:[];
+}
 
 export default function CommentSection({data}:any){
     const id=data._id;
@@ -19,9 +25,9 @@ export default function CommentSection({data}:any){
         }
      }
  
-     const handleSocketNewComment = (newComment:any) => {
+     const handleSocketNewComment = (newComment:CommentType) => {
         // Update UI based on the newComment received
-        setComments((prevComments) => [...prevComments, newComment]);
+        setComments((prevComments): CommentType[] => [...prevComments, newComment]);
       };
   
       handleCommentData();
