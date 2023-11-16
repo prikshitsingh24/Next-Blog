@@ -17,7 +17,7 @@ export default function ReplyComment({data,onReplySubmit}:any){
         if(text==''){
             console.log('error please fill the comment');
         }else{
-            const response=await fetch(`https://next-blogs-delta-ecru.vercel.app/api/comments`,{
+            const response=await fetch(`${process.env.NEXT_PUBLIC_URL}/api/comments`,{
         method:'POST',
         headers:{
           'Content-Type':'application/json',

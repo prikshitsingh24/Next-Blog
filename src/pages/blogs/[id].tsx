@@ -18,7 +18,7 @@ export async function getServerSideProps(context: { query: { id: any; }; }) {
     try {
     // Fetch blog data based on the slug
     // Replace this with your actual data fetching code
-    const response = await fetch(`${process.env.VERCEL_PUBLIC_URL}/api/getBlogById?id=${id}`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/getBlogById?id=${id}`);
     if (!response.ok) {
       // Handle the case where the blog post is not found
       return { props: { data: null } };

@@ -48,7 +48,7 @@ export default function Blogs({data,session}:any){
   useEffect(()=>{
     const fetchBlogs=async()=>{
       try{
-        const response=await fetch(`https://next-blogs-delta-ecru.vercel.app/api/getBlogByTitle?title=${blogSearch}`);
+        const response=await fetch(`${process.env.NEXT_PUBLIC_URL}/api/getBlogByTitle?title=${blogSearch}`);
         const data = await response.json();
         if(data){
           console.log("this is data array: ",[data]);
@@ -138,7 +138,7 @@ export async function getServerSideProps(context:any) {
         }
       }
     }
-    const response = await fetch(`${process.env.VERCEL_PUBLIC_URL}/api/postBlogs?limit=10`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/postBlogs?limit=10`);
     const data = await response.json() as Data;
     console.log(session);
     return {
