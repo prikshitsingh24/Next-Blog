@@ -1,9 +1,4 @@
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
-import ButtonX from "../Buttons/buttons";
-import AddComment from "./addComment";
-import ReplyComment from "./replyComment";
-import { io } from 'socket.io-client';
 
 interface ReplyType{
     _id:string;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
+import  io  from "socket.io-client";
 import AddComment from "./addComment";
 import CommentTile from "./commentsTile";
 
