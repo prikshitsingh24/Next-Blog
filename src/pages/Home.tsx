@@ -48,7 +48,7 @@ export default function Blogs({data,session}:any){
   useEffect(()=>{
     const fetchBlogs=async()=>{
       try{
-        const response=await fetch(`https://next-blogs-delta-ecru.vercel.app/api/getBlogByTitle?title=${blogSearch}`);
+        const response=await fetch(`${process.env.NEXT_PUBLIC_URL}/api/getBlogByTitle?title=${blogSearch}`);
         const data = await response.json();
         if(data){
           console.log("this is data array: ",[data]);
@@ -76,15 +76,15 @@ export default function Blogs({data,session}:any){
           )}
           {userInfo?(
             
-              <div className="absolute z-[999] mx-40 min-[862px]:right-0 mx-10 w-60 h-40 bg-black rounded-xl my-1">
+              <div className="absolute z-[999] mx-40 min-[862px]:right-0 mx-10 w-60 h-30 bg-black rounded-xl my-1">
               <div className="mx-[90px]">
               <div className="my-2 cursor-pointer text-white" onClick={handleSettings}>Settings</div>
               </div>
               <div className="border-t border-gray my-1"></div>
               <div className="mx-[90px]">
-              <div className="cursor-pointer text-white" onClick={handleLogout}>Logout</div>
+              <div className="cursor-pointer text-white my-3" onClick={handleLogout}>Logout</div>
               </div>
-              <div className="border-t border-gray my-1"></div>
+              <div className="border-t border-gray"></div>
             </div>
           ):(
             <div></div>
@@ -138,7 +138,7 @@ export async function getServerSideProps(context:any) {
         }
       }
     }
-    const response = await fetch(`${process.env.VERCEL_PUBLIC_URL}/api/postBlogs?limit=10`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/postBlogs?limit=10`);
     const data = await response.json() as Data;
     console.log(session);
     return {

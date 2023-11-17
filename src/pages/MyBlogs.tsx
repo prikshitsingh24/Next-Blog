@@ -26,10 +26,9 @@ export default function MyBlogs({userBlogs}:any){
     useEffect(()=>{
       const fetchBlogs=async()=>{
         try{
-          const response=await fetch(`https://next-blogs-delta-ecru.vercel.app/api/getBlogByTitle?title=${blogSearch}`);
+          const response=await fetch(`${process.env.NEXT_PUBLIC_URL}/api/getBlogByTitle?title=${blogSearch}`);
           const data = await response.json();
           if(data){
-            console.log("this is data array: ",[data]);
             setSearchDataList(data);
           }else{
             console.log("didnt work")
@@ -53,8 +52,8 @@ export default function MyBlogs({userBlogs}:any){
         <div className="border-t border-2 border-black my-2 mx-10"></div>
         <div className="relative flex justify-center item-center my-5 rounded-xl">
             <div className="flex bg-white w-96 rounded-xl">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-5 h-5 my-2 mx-2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-5 h-5 my-2 mx-2">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
             <input className="rounded-xl border-none w-full outline-none px-5" placeholder="Search all the blog you you have written!!" onChange={handleBlogSearch} />
             </div>
@@ -75,7 +74,7 @@ export async function getServerSideProps(context:any) {
     const session=await getServerSession(context.req,context.res,authOptions);
   
     try {
-      const response = await fetch(`${process.env.VERCEL_PUBLIC_URL}/api/getUserBlogs?author=${session?.user?.name}`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/getUserBlogs?author=${session?.user?.name}`);
       
       if (response.ok) {
         const userBlogs = await response.json();
