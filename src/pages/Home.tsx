@@ -76,15 +76,15 @@ export default function Blogs({data,session}:any){
           )}
           {userInfo?(
             
-              <div className="absolute z-[999] mx-40 min-[862px]:right-0 mx-10 w-60 h-40 bg-black rounded-xl my-1">
+              <div className="absolute z-[999] mx-40 min-[862px]:right-0 mx-10 w-60 h-30 bg-black rounded-xl my-1">
               <div className="mx-[90px]">
               <div className="my-2 cursor-pointer text-white" onClick={handleSettings}>Settings</div>
               </div>
               <div className="border-t border-gray my-1"></div>
               <div className="mx-[90px]">
-              <div className="cursor-pointer text-white" onClick={handleLogout}>Logout</div>
+              <div className="cursor-pointer text-white my-3" onClick={handleLogout}>Logout</div>
               </div>
-              <div className="border-t border-gray my-1"></div>
+              <div className="border-t border-gray"></div>
             </div>
           ):(
             <div></div>
