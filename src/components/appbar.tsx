@@ -40,7 +40,6 @@ export default function Appbar(props:any) {
             <button className="bg-darkgrey text-white rounded position-fixed px-4 mx-5">Home</button>
             <button className="bg-darkgrey text-white rounded position-fixed px-4 mx-5" onClick={() => router.push('/MyBlogs')}>My blogs</button>
             <button className="bg-darkgrey text-white rounded position-fixed px-4 mx-5" onClick={() => router.push('/AddBlogs')}>Add blogs</button>
-            <button className="bg-darkgrey text-white rounded position-fixed px-4 mx-5" onClick={() => router.push('/BloggersGuild')}>Blogger's Guild</button>
           </>
         )}
       </div>

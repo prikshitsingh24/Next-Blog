@@ -24,20 +24,8 @@ export default function CommentSection({data}:any){
             console.log('no comments founds');
         }
      }
- 
-     const handleSocketNewComment = (newComment:CommentType) => {
-        // Update UI based on the newComment received
-        setComments((prevComments:CommentType[]): CommentType[] => [...prevComments, newComment]);
-      };
-  
       handleCommentData();
-      const socket = io(`${process.env.NEXT_PUBLIC_URL}:80`);
-      socket.on('newParentComment', handleSocketNewComment);
-  
-      return () => {
-        // Clean up event listener when the component unmounts
-        socket.off('newParentComment', handleSocketNewComment);
-      };
+      
     },[id]);
     return(
         <div>

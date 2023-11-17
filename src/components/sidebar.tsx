@@ -24,7 +24,6 @@ export default function Sidebar(){
                 <ButtonX text={"Home"} icon={'./home.png'} goTo={()=>router.push('/Home')}></ButtonX>
                 <ButtonX text={"My blogs"} icon={'./contract.png'} goTo={()=>router.push('/MyBlogs')}></ButtonX>
                 <ButtonX text={"Add blogs"} icon={'./add.png'} goTo={()=>router.push('/AddBlogs')}></ButtonX>
-                <ButtonX text={"Blogger's Guild"} icon={'./castle.png'} goTo={()=>router.push('/BloggersGuild')}></ButtonX>
                 <ButtonX text={"settings"} icon={'./settings.png'} goTo={()=>router.push('/Settings')}></ButtonX>
                 <ButtonX text={"Logout"} icon={'./logout.png'} goTo={()=>signOut()}></ButtonX>
                 </div>
